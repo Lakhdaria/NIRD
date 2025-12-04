@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zone de saisie frustrante</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles_global.css">
+    <link rel="stylesheet" href="styles/style_avis.css">
+</head>
+<body>
+    <canvas id="particlesCanvas" aria-hidden="true"></canvas>
+    <div class="bg"></div>
+
+    <div class="page">
+        <header class="header">
+            <div class="header__brand">
+                <div class="brand-logo">N</div>
+                <div class="brand-text">
+                    <span class="brand-title">NIRD</span>
+                    <span class="brand-sub">Numérique Inclusif • Responsable • Durable</span>
+                </div>
+            </div>
+
+            <nav class="nav" id="navMenu">
+                <a href="index.html">Accueil</a>
+                <a href="repair-game.html">Jeu de réparation</a>
+                <a href="page-linux.html">Installation Linux</a>
+                <a href="avis.html" class="is-active">Donnez votre avis</a>
+            </nav>
+
+            <button class="header__cta" onclick="window.location.href='index.html'">
+                <span>Retour au site</span>
+            </button>
+
+            <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+        <main class="app">
+            <h1 class="title">Donne ton avis... rapidement</h1>
+            <p class="subtitle">
+                Écris ton avis <strong>un mot à la fois</strong>. Attends le signal, puis tape un mot avant la fin du temps.
+            </p>
+
+            <div class="text-wrapper" id="text-wrapper">
+                <div class="top-row">
+                    <div class="timer">
+                        <span class="timer-label">Temps</span>
+                        <span id="timer-text" class="timer-value">--</span>
+                    </div>
+                </div>
+
+                <div class="decay-bar-container">
+                    <div id="decay-bar"></div>
+                </div>
+
+                <div class="input-area">
+                    <textarea id="feedback"
+                        placeholder="Tape ton avis ici, un mot après l'autre, selon le signal."></textarea>
+                    <span id="status" class="status-text status-overlay"></span>
+                </div>
+
+                <div class="actions">
+                    <button id="send-btn" class="btn btn--primary">Envoyer</button>
+                </div>
+            </div>
+
+            <!-- Gros message de validation -->
+            <div id="success-overlay" class="success-overlay">
+                <div class="overlay-particles"></div>
+                <div class="success-box">
+                    <div class="success-icon">🧠</div>
+                    <h2>Avis envoyé !</h2>
+                    <p>Merci d'avoir survécu à cette zone de saisie infernale.</p>
+                    <p class="success-sub">Tu peux retourner à l'accueil ou la refaire subir à quelqu'un d'autre.</p>
+                    <a href="index.html" class="btn btn--ghost" id="home-btn">Retour à l'accueil</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts/script_avis.js"></script>
+</body>
+</html>
