@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIRD – Village numérique résistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #020617;
+  color: #f9fafb;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ---------- Background ---------- */
+.bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(249, 115, 22, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 70%),
+    #020617;
+  pointer-events: none;
+  z-index: -1;
+}
+
+#particlesCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+/* ---------- Layout ---------- */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header:hover {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: rgba(148, 163, 184, 0.3);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.header.is-scrolled {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: rgba(165, 180, 252, 0.3);
+  box-shadow: 
+    0 16px 56px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(165, 180, 252, 0.1);
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.header__brand:hover {
+  transform: scale(1.05);
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #f97316 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-logo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.header__brand:hover .brand-logo::before {
+  opacity: 1;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #fff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-sub {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.nav a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #cbd5e1;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(16, 185, 129, 0.2));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav a:hover,
+.nav a.is-active {
+  color: #f8fafc;
+  transform: translateY(-2px);
+}
+
+.nav a:hover::before,
+.nav a.is-active::before {
+  opacity: 1;
+}
+
+.header__cta {
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #4f46e5, #10b981);
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.header__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #6366f1, #14b8a6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.header__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+}
+
+.header__cta:hover::before {
+  opacity: 1;
+}
+
+.header__cta span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Burger */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.burger span {
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: #e5e7eb;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.burger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.burger.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+.burger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 3rem;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero__title {
+  font-size: clamp(2.2rem, 4vw + 1rem, 3.5rem);
+  line-height: 1.15;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 4px;
+  color: #4f46e5;
+  animation: blink 1.2s steps(2, start) infinite;
+  font-weight: 400;
+}
+
+.hero__subtitle {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.hero__subtitle--small {
+  font-size: 1rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  background: rgba(79, 70, 229, 0.1);
+  border: 1px solid rgba(165, 180, 252, 0.3);
+  color: #a5b4fc;
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background: rgba(79, 70, 229, 0.15);
+  border-color: rgba(165, 180, 252, 0.5);
+  transform: translateY(-2px);
+}
+
+.tag--outline {
+  border-style: dashed;
+  background: transparent;
+}
+
+/* Hero right */
+.hero__right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pc3d__canvas {
+  width: 100%;
+  height: 450px;
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  position: relative;
+}
+
+.pc3d__canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(79, 70, 229, 0.05) 100%);
+  pointer-events: none;
+}
+
+#pcCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.9rem 1.8rem;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #4f46e5, #10b981);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+}
+
+.btn--primary::before {
+  background: linear-gradient(135deg, #6366f1, #14b8a6);
+}
+
+.btn--primary:hover {
+  box-shadow: 0 10px 30px rgba(79, 70, 229, 0.4);
+}
+
+.btn--primary:hover::before {
+  opacity: 1;
+}
+
+.btn--ghost {
+  background: rgba(15, 23, 42, 0.5);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.btn--ghost::before {
+  background: rgba(79, 70, 229, 0.1);
+}
+
+.btn--ghost:hover {
+  border-color: rgba(165, 180, 252, 0.5);
+}
+
+.btn--ghost:hover::before {
+  opacity: 1;
+}
+
+/* ---------- Sections ---------- */
+.section {
+  margin-top: 4rem;
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(79, 70, 229, 0.5) 50%, 
+    transparent 100%);
+}
+
+.section--alt {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.section__head {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.section__head h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section__head p {
+  font-size: 1rem;
+  color: #94a3b8;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ---------- Grid / Cards ---------- */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card {
+  padding: 1.8rem 1.6rem;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.05));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #f8fafc;
+  position: relative;
+  z-index: 1;
+}
+
+.card p {
+  position: relative;
+  z-index: 1;
+  line-height: 1.6;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(165, 180, 252, 0.3);
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(165, 180, 252, 0.1);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* ---------- PC 3D Info ---------- */
+.pc3d {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.pc3d__info {
+  flex: 1;
+}
+
+.pc3d__info h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #f8fafc;
+}
+
+.pc3d__info ul {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+.pc3d__info ul li {
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.pc3d__info ul li::marker {
+  color: #4f46e5;
+}
+
+.pc3d__note {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  padding: 1rem;
+  border-left: 3px solid #4f46e5;
+  background: rgba(79, 70, 229, 0.05);
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+/* ---------- Journey ---------- */
+.journey {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+}
+
+.journey__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.step {
+  display: flex;
+  gap: 1.2rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  transition: all 0.3s ease;
+}
+
+.step:hover {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(165, 180, 252, 0.2);
+  transform: translateX(8px);
+}
+
+.step__id {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.step h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #f8fafc;
+}
+
+.step p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.journey__side {
+  padding: 2rem;
+  border-radius: 16px;
+  background: rgba(79, 70, 229, 0.05);
+  border: 1px solid rgba(165, 180, 252, 0.2);
+  position: sticky;
+  top: 120px;
+}
+
+.journey__side h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #f8fafc;
+}
+
+.journey__side ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+.journey__side ul li {
+  margin-bottom: 0.5rem;
+}
+
+.journey__note {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* ---------- Resources ---------- */
+.resources {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.resources__group {
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  transition: all 0.3s ease;
+}
+
+.resources__group:hover {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(165, 180, 252, 0.2);
+}
+
+.resources__group h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #f8fafc;
+}
+
+.resources__group ul {
+  font-size: 0.95rem;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.resources__group ul li {
+  margin-bottom: 0.6rem;
+}
+
+.resources__group a {
+  color: #a5b4fc;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.resources__group a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #4f46e5, #10b981);
+  transition: width 0.3s ease;
+}
+
+.resources__group a:hover {
+  color: #c7d2fe;
+}
+
+.resources__group a:hover::after {
+  width: 100%;
+}
+
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #64748b;
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .page {
+    padding-inline: 1.5rem;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .hero__right {
+    order: -1;
+  }
+
+  .pc3d__canvas {
+    height: 350px;
+  }
+
+  .grid--3,
+  .resources {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .journey {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .journey__side {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0.8rem 1rem;
+    top: 0.5rem;
+  }
+
+  .nav {
+    position: fixed;
+    inset: 80px 1rem auto;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav a {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  .nav a:first-child {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .nav a:last-child {
+    border-radius: 0 0 16px 16px;
+    border-bottom: none;
+  }
+
+  .header__cta {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .hero {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .pc3d__canvas {
+    height: 300px;
+  }
+
+  .section {
+    padding: 2rem 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .grid--3,
+  .resources {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pc3d {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding-inline: 1rem;
+  }
+
+  .hero__buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+    </style>
+</head>
+<body>
+    <canvas id="particlesCanvas" aria-hidden="true"></canvas>
+    <div class="bg"></div>
+
+    <div class="page">
+        <header class="header">
+            <div class="header__brand">
+                <div class="brand-logo">N</div>
+                <div class="brand-text">
+                    <span class="brand-title">NIRD</span>
+                    <span class="brand-sub">Numérique Inclusif · Responsable · Durable</span>
+                </div>
+            </div>
+
+            <nav class="nav" id="navMenu">
+                <a href="#hero">Accueil</a>
+                <a href="#actors">Acteurs</a>
+                <a href="#pc3d">PC & matériel</a>
+                <a href="#journey">Objectifs</a>
+                <a href="#resources">Ressources</a>
+            </nav>
+
+            <button class="header__cta" onclick="document.querySelector('#journey').scrollIntoView({behavior:'smooth'})">
+                <span>Préparer la Nuit</span>
+            </button>
+
+            <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+        <main>
+            <section class="hero" id="hero">
+                <div class="hero__left">
+                    <h1 class="hero__title">
+                        <span id="typewriter"></span><span class="cursor">|</span>
+                    </h1>
+
+                    <p class="hero__subtitle">
+                        À la fin du support de Windows 10, beaucoup d'établissements restent
+                        dépendants des grandes plateformes et d'un matériel qu'on déclare trop vite "obsolète".
+                    </p>
+
+                    <p class="hero__subtitle hero__subtitle--small">
+                        La démarche NIRD propose une autre voie : logiciels libres, réemploi,
+                        sobriété numérique et travail en commun. Votre application doit aider à
+                        comprendre cette démarche et à passer à l'action.
+                    </p>
+
+                    <div class="hero__buttons">
+                        <button class="btn btn--primary" onclick="document.querySelector('#actors').scrollIntoView({behavior:'smooth'})">
+                            Voir qui porte le projet
+                        </button>
+                        <button class="btn btn--ghost" onclick="document.querySelector('#pc3d').scrollIntoView({behavior:'smooth'})">
+                            Explorer un PC en 3D
+                        </button>
+                    </div>
+
+                    <div class="hero__tags">
+                        <span class="tag">Nuit de l'Info 2025</span>
+                        <span class="tag tag--outline">Production sous licence libre</span>
+                    </div>
+                </div>
+
+                <aside class="hero__right">
+                    <div class="pc3d__canvas">
+                        <canvas id="pcCanvas" aria-label="Modèle 3D d'un vieux ordinateur de bureau"></canvas>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="section" id="actors">
+                <header class="section__head">
+                    <h2>Qui est impliqué dans NIRD ?</h2>
+                    <p>
+                        NIRD est porté par la Forge des communs numériques éducatifs et s'appuie
+                        sur un réseau d'acteurs dans et autour de l'école.
+                    </p>
+                </header>
+
+                <div class="grid grid--3">
+                    <article class="card reveal">
+                        <h3>Élèves et éco-délégués</h3>
+                        <p>
+                            Ils mènent des enquêtes, testent des usages libres et
+                            proposent des pistes pour un numérique plus sobre.
+                        </p>
+                    </article>
+
+                    <article class="card reveal">
+                        <h3>Enseignants et équipes éducatives</h3>
+                        <p>
+                            Ils intègrent la démarche NIRD dans les cours, les projets, les clubs,
+                            et partagent leurs retours d'expérience.
+                        </p>
+                    </article>
+
+                    <article class="card reveal">
+                        <h3>Partenaires & collectivités</h3>
+                        <p>
+                            Associations, collectivités et services techniques accompagnent la
+                            transition : matériel reconditionné, hébergement local, formations…
+                        </p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section section--alt" id="pc3d">
+                <header class="section__head">
+                    <h2>Que contient vraiment un PC ?</h2>
+                    <p>
+                        Pour parler de réemploi et d'obsolescence programmée, il faut voir ce qui
+                        se cache derrière la coque. Le modèle 3D de la page d'accueil sert de point
+                        de départ pour identifier les grandes familles de composants.
+                    </p>
+                </header>
+
+                <div class="pc3d">
+                    <div class="pc3d__info reveal">
+                        <h3>Quelques repères</h3>
+                        <ul>
+                            <li>Boîtier : souvent conservable, même si le reste évolue.</li>
+                            <li>Carte mère : supporte et relie tous les composants.</li>
+                            <li>Processeur et mémoire : rarement "morts", souvent juste mal utilisés.</li>
+                            <li>Stockage : on peut le changer ou le réutiliser ailleurs.</li>
+                            <li>Alimentation : joue sur la durée de vie et la consommation.</li>
+                        </ul>
+                        <p class="pc3d__note">
+                            Dans l'application finale, cette vue peut servir d'entrée vers des
+                            fiches pédagogiques, des mini-jeux ou des scénarios de réparation.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="journey">
+                <header class="section__head">
+                    <h2>Objectifs de la plateforme</h2>
+                    <p>
+                        Le sujet est volontairement large. L'idée est de guider les publics de
+                        la prise de conscience vers des actions concrètes dans leur établissement.
+                    </p>
+                </header>
+
+                <div class="journey">
+                    <div class="journey__list">
+                        <div class="step reveal">
+                            <span class="step__id">1</span>
+                            <div>
+                                <h3>Poser le décor</h3>
+                                <p>
+                                    Expliquer simplement ce qui pose problème aujourd'hui :
+                                    dépendances logicielles, données hébergées ailleurs, matériel remplacé trop vite.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="step reveal">
+                            <span class="step__id">2</span>
+                            <div>
+                                <h3>Montrer d'autres chemins</h3>
+                                <p>
+                                    Faire découvrir des exemples de migration vers des solutions libres,
+                                    des expériences de réemploi, des initiatives NIRD déjà en place.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="step reveal">
+                            <span class="step__id">3</span>
+                            <div>
+                                <h3>Donner des idées d'actions</h3>
+                                <p>
+                                    Ateliers élèves, projets de classe, cartographie du parc, campagne
+                                    de sensibilisation… L'interface doit laisser des pistes concrètes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="journey__side reveal">
+                        <h3>Contraintes pour la Nuit</h3>
+                        <ul>
+                            <li>Application en ligne à la fin de la Nuit.</li>
+                            <li>Ressources et médias libres de droit.</li>
+                            <li>Code et contenu publiés sous licence libre.</li>
+                        </ul>
+                        <p class="journey__note">
+                            Vous pouvez choisir le format : récit interactif, carte du "village",
+                            tableau de bord, jeu court… L'important est que ce soit clair et utilisable.
+                        </p>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="section" id="resources">
+                <header class="section__head">
+                    <h2>Ressources pour aller plus loin</h2>
+                    <p>
+                        Quelques points d'entrée pour nourrir le contenu de l'application
+                        et vérifier les informations présentées.
+                    </p>
+                </header>
+
+                <div class="resources">
+                    <div class="resources__group">
+                        <h3>Site NIRD</h3>
+                        <ul>
+                            <li>
+                                <a href="https://nird.forge.apps.education.fr/" target="_blank">
+                                    Site officiel de la démarche NIRD
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="resources__group">
+                        <h3>Médias</h3>
+                        <ul>
+                            <li><a href="#" target="_blank">Reportages sur les logiciels libres à l'école</a></li>
+                            <li><a href="#" target="_blank">Obsolescence programmée et reconditionnement</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="resources__group">
+                        <h3>Exemples d'établissements</h3>
+                        <ul>
+                            <li><a href="#" target="_blank">Projet NIRD au lycée Carnot</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>
+                Nuit de l'Info 2025 · Projet NIRD · Vers un numérique plus libre et plus sobre.
+            </p>
+        </footer>
+    </div>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+    </script>
+
+    <script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+// Menu Burger
+const burgerBtn = document.getElementById("burgerBtn");
+const navMenu = document.getElementById("navMenu");
+
+if (burgerBtn && navMenu) {
+  burgerBtn.addEventListener("click", () => {
+    navMenu.classList.toggle("open");
+    burgerBtn.classList.toggle("is-open");
+  });
+
+  navMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+      burgerBtn.classList.remove("is-open");
+    });
+  });
+}
+
+// Reveal on scroll avec stagger
+const revealEls = document.querySelectorAll(".reveal");
+
+const handleReveal = () => {
+  const threshold = window.innerHeight * 0.85;
+
+  revealEls.forEach((el, index) => {
+    const top = el.getBoundingClientRect().top;
+    if (top < threshold && !el.classList.contains('visible')) {
+      setTimeout(() => {
+        el.classList.add("visible");
+      }, index * 100);
+    }
+  });
+};
+
+window.addEventListener("scroll", handleReveal);
+handleReveal();
+
+// Header state
+const headerEl = document.querySelector(".header");
+const updateHeaderState = () => {
+  if (!headerEl) return;
+  headerEl.classList.toggle("is-scrolled", window.scrollY > 50);
+};
+window.addEventListener("scroll", updateHeaderState);
+updateHeaderState();
+
+// Typewriter
+const typeTarget = document.getElementById("typewriter");
+
+if (typeTarget) {
+  const phrases = [
+    "Le village numérique résistant",
+    "Un PC qui dure longtemps",
+    "Libres, sobres, résilients",
+    "Agir dès la Nuit de l'Info"
+  ];
+
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  const type = () => {
+    const current = phrases[phraseIndex % phrases.length];
+
+    if (!deleting) {
+      charIndex = Math.min(charIndex + 1, current.length);
+      typeTarget.textContent = current.slice(0, charIndex);
+      if (charIndex === current.length) {
+        deleting = true;
+        setTimeout(type, 2000);
+        return;
+      }
+    } else {
+      charIndex = Math.max(charIndex - 1, 0);
+      typeTarget.textContent = current.slice(0, charIndex);
+      if (charIndex === 0) {
+        deleting = false;
+        phraseIndex++;
+        setTimeout(type, 500);
+        return;
+      }
+    }
+
+    const delay = deleting ? 50 : 100;
+    setTimeout(type, delay);
+  };
+
+  setTimeout(type, 1000);
+}
+
+// Particles
+const particlesCanvas = document.getElementById("particlesCanvas");
+
+if (particlesCanvas) {
+  const ctx = particlesCanvas.getContext("2d");
+  let width = 0;
+  let height = 0;
+  let particles = [];
+
+  const resetParticles = () => {
+    const count = Math.min(100, Math.floor((width * height) / 20000));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      size: Math.random() * 2 + 0.5
+    }));
+  };
+
+  const resizeParticles = () => {
+    width = particlesCanvas.width = window.innerWidth;
+    height = particlesCanvas.height = window.innerHeight;
+    resetParticles();
+  };
+
+  const drawParticles = () => {
+    ctx.clearRect(0, 0, width, height);
+
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+      gradient.addColorStop(0, 'rgba(165, 180, 252, 0.8)');
+      gradient.addColorStop(1, 'rgba(165, 180, 252, 0)');
+      
+      ctx.beginPath();
+      ctx.fillStyle = gradient;
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          const alpha = (1 - dist / 150) * 0.3;
+          ctx.strokeStyle = `rgba(94, 234, 212, ${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  };
+
+  const animateParticles = () => {
+    drawParticles();
+    requestAnimationFrame(animateParticles);
+  };
+
+  window.addEventListener("resize", resizeParticles);
+  resizeParticles();
+  animateParticles();
+}
+
+// Three.js PC 3D
+const canvas = document.getElementById("pcCanvas");
+
+if (canvas) {
+  const scene = new THREE.Scene();
+
+  const rect = canvas.getBoundingClientRect();
+  const camera = new THREE.PerspectiveCamera(
+    45,
+    rect.width / rect.height,
+    0.1,
+    100
+  );
+
+  camera.position.set(1.8, 1.2, 1.8);
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(rect.width, rect.height);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.2;
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x222222, 1.1));
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
+  dirLight.position.set(3, 5, 2);
+  scene.add(dirLight);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.8;
+  controls.enablePan = false;
+  controls.minDistance = 1.0;
+  controls.maxDistance = 4.0;
+
+  const loader = new GLTFLoader();
+  loader.load(
+    "assets/models/retro_computer.glb",
+    (gltf) => {
+      const retroPC = gltf.scene;
+      retroPC.scale.set(2.0, 2.0, 2.0);
+      retroPC.rotation.y = Math.PI / 2;
+      scene.add(retroPC);
+
+      const box = new THREE.Box3().setFromObject(retroPC);
+      const center = box.getCenter(new THREE.Vector3());
+      controls.target.copy(center);
+
+      camera.position.addVectors(
+        center,
+        new THREE.Vector3(1.8, 1.2, 1.8)
+      );
+    },
+    undefined,
+    (err) => console.error("Erreur chargement modèle :", err)
+  );
+
+  const handleResize3D = () => {
+    const r = canvas.getBoundingClientRect();
+    camera.aspect = r.width / r.height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(r.width, r.height);
+  };
+  window.addEventListener("resize", handleResize3D);
+
+  const animate = () => {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  };
+  animate();
+}
+    </script>
+</body>
+</html>
