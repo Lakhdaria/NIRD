@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIRD – Jeu de Réparation de PC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles/styles_global.css">
+    <link rel="stylesheet" href="styles/game.css">
+</head>
+
+<body>
+    <canvas id="particlesCanvas" aria-hidden="true"></canvas>
+    <div class="bg"></div>
+
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="header__brand">
+                <div class="brand-logo">N</div>
+                <div class="brand-text">
+                    <span class="brand-title">NIRD</span>
+                    <span class="brand-sub">Numérique Inclusif · Responsable · Durable</span>
+                </div>
+            </div>
+
+            <nav class="nav" id="navMenu">
+                <a href="index.html">Accueil</a>
+                <a href="repair-game.html" class="is-active">Jeu de réparation</a>
+            </nav>
+
+            <button class="header__cta" onclick="window.location.href='index.html'">
+                <span>Retour au site</span>
+            </button>
+
+            <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+        <main>
+            <!-- Introduction pédagogique -->
+            <section class="game-intro">
+                <h1 class="game-intro__title">
+                    Réparez ce PC et donnez-lui une seconde vie ! 🔧
+                </h1>
+                <p class="game-intro__text">
+                    Au lieu de jeter un ordinateur "obsolète", vous pouvez le réparer et installer Linux pour le rendre performant à nouveau.
+                    C'est écologique, économique, et ça réduit les déchets électroniques !
+                </p>
+            </section>
+
+            <!-- Zone de jeu principale -->
+            <section class="game-container">
+                <!-- Barre de vie et progression en haut -->
+                <div class="health-bar-container">
+                    <div class="health-info">
+                        <div class="heart-icon" id="heartIcon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                        <div class="health-text">
+                            <span class="health-label">État du PC</span>
+                            <span class="health-percentage" id="healthPercentage">0%</span>
+                        </div>
+                    </div>
+                    <div class="health-bar">
+                        <div class="health-bar__fill" id="healthBarFill"></div>
+                    </div>
+                    <p class="health-status" id="healthStatus">Le PC attend d'être réparé...</p>
+                </div>
+
+                <!-- Zone principale : Scène 3D + Composants côte à côte -->
+                <div class="game-main">
+                    <!-- Scène 3D avec la tour -->
+                    <div class="game-left">
+                        <div class="game-3d">
+                            <canvas id="gameCanvas"></canvas>
+                            <div class="game-instructions" id="gameInstructions">
+                                <p>👆 Glissez les composants vers la tour</p>
+                                <p>🖱️ Clic pour pivoter la vue</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Composants à droite de la tour -->
+                    <div class="game-right">
+                        <h3 class="parts-title">Composants</h3>
+                        <div class="parts-list">
+                            <div class="part-card" id="cpuCard" data-part="cpu" draggable="true">
+                                <button class="part-info-btn" data-part="cpu" title="En savoir plus">ℹ️</button>
+                                <div class="part-icon">🔲</div>
+                                <div class="part-info">
+                                    <h4>Processeur</h4>
+                                    <p>Ryzen 5 3600</p>
+                                    <span class="part-status">À installer</span>
+                                </div>
+                            </div>
+                            <div class="part-card" id="ramCard" data-part="ram" draggable="true">
+                                <button class="part-info-btn" data-part="ram" title="En savoir plus">ℹ️</button>
+                                <div class="part-icon">💾</div>
+                                <div class="part-info">
+                                    <h4>RAM</h4>
+                                    <p>8GB DDR4</p>
+                                    <span class="part-status">À installer</span>
+                                </div>
+                            </div>
+                            <div class="part-card" id="gpuCard" data-part="gpu" draggable="true">
+                                <button class="part-info-btn" data-part="gpu" title="En savoir plus">ℹ️</button>
+                                <div class="part-icon">🎮</div>
+                                <div class="part-info">
+                                    <h4>Carte Graphique</h4>
+                                    <p>GPU</p>
+                                    <span class="part-status">À installer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conteneur de notifications (popup centrée) -->
+            <div class="notifications-container" id="notificationsContainer"></div>
+
+            <!-- Panneau d'informations des composants -->
+            <div class="info-panel" id="infoPanel">
+                <div class="info-panel-content" id="infoPanelContent">
+                    <!-- Contenu dynamique injecté par JS -->
+                </div>
+                <button class="info-panel-close" id="infoPanelClose">✕</button>
+            </div>
+
+            <!-- Messages pédagogiques -->
+            <section class="pedagogy-cards">
+                <article class="pedagogy-card reveal">
+                    <div class="pedagogy-icon">🌱</div>
+                    <h3>Impact écologique</h3>
+                    <p>
+                        Produire un nouveau PC consomme énormément de ressources : terres rares, 
+                        eau, énergie. En réparant, vous évitez ces impacts et réduisez les 
+                        déchets électroniques, qui contiennent des substances toxiques.
+                    </p>
+                </article>
+                <article class="pedagogy-card reveal">
+                    <div class="pedagogy-icon">💰</div>
+                    <h3>Économies</h3>
+                    <p>
+                        Un processeur et de la RAM coûtent bien moins cher qu'un PC neuf. 
+                        Réparer permet d'économiser des centaines d'euros tout en obtenant 
+                        de bonnes performances pour un usage quotidien.
+                    </p>
+                </article>
+                <article class="pedagogy-card reveal">
+                    <div class="pedagogy-icon">🐧</div>
+                    <h3>Linux : la solution</h3>
+                    <p>
+                        Linux est léger et gratuit, parfait pour redonner vie à un vieux PC. 
+                        Des distributions comme Ubuntu, Linux Mint ou Xubuntu sont faciles 
+                        à installer et à utiliser, même pour les débutants !
+                    </p>
+                </article>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>
+                Nuit de l'Info 2025 · Projet NIRD · Vers un numérique plus libre et plus sobre.
+            </p>
+        </footer>
+    </div>
+
+    <!-- Modal QCM Linux -->
+    <div class="modal" id="quizModal">
+        <div class="modal__content">
+            <h2 class="modal__title">Quiz Linux 🐧</h2>
+            <p class="modal__intro">
+                Bravo pour l'installation ! Maintenant, testons vos connaissances sur Linux pour finaliser la réparation.
+            </p>
+
+            <div class="quiz-container" id="quizContainer">
+                <!-- Les questions seront injectées dynamiquement par JavaScript -->
+            </div>
+
+            <div class="quiz-results" id="quizResults" style="display: none;">
+                <div class="results-icon">🎉</div>
+                <h3 class="results-title">PC réparé avec succès !</h3>
+                <p class="results-message">
+                    Félicitations ! Vous avez réparé cet ordinateur et l'avez équipé de Linux.
+                    C'est une démarche écologique et économique qui prolonge la durée de vie
+                    du matériel tout en offrant de bonnes performances.
+                </p>
+                <div class="results-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="finalScore">100%</span>
+                        <span class="stat-label">État final</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="correctAnswers">5/5</span>
+                        <span class="stat-label">Bonnes réponses</span>
+                    </div>
+                </div>
+                <a href="page-linux.html" class="btn btn--primary">
+                    Continuer l'aventure →
+                </a>
+                <button class="btn btn--ghost" onclick="window.location.href='index.html'">
+                    Retour au site
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Three.js -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+    </script>
+
+    <!-- Scripts du jeu -->
+    <script type="module" src="scripts/game.js"></script>
+</body>
+
+</html>

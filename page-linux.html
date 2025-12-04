@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIRD – Installation de Linux</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles/styles_global.css">
+    <link rel="stylesheet" href="styles/game.css">
+</head>
+
+<body>
+    <canvas id="particlesCanvas" aria-hidden="true"></canvas>
+    <div class="bg"></div>
+
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="header__brand">
+                <div class="brand-logo">N</div>
+                <div class="brand-text">
+                    <span class="brand-title">NIRD</span>
+                    <span class="brand-sub">Numérique Inclusif · Responsable · Durable</span>
+                </div>
+            </div>
+
+            <nav class="nav" id="navMenu">
+                <a href="index.html">Accueil</a>
+                <a href="repair-game.html">Jeu de réparation</a>
+                <a href="page-linux.html" class="is-active">Installation Linux</a>
+            </nav>
+
+            <button class="header__cta" onclick="window.location.href='index.html'">
+                <span>Retour au site</span>
+            </button>
+
+            <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+        <main>
+            <!-- Redirection vers le simulateur -->
+            <section class="hero" style="min-height: 80vh; display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; max-width: 700px; padding: 2rem;">
+                    <div style="font-size: 5rem; margin-bottom: 1.5rem;">🐧</div>
+                    <h1 class="game-intro__title">
+                        Simulateur d'Installation Linux
+                    </h1>
+                    <p class="hero__subtitle" style="margin-top: 1.5rem;">
+                        Découvrez comment installer Linux sur votre PC à travers une expérience 
+                        interactive et ludique. Aucun risque, tout est simulé !
+                    </p>
+                    
+                    <div class="hero__buttons" style="margin-top: 2rem; justify-content: center;">
+                        <button class="btn btn--primary" onclick="window.location.href='linux-simulator.html'">
+                            🚀 Lancer le simulateur
+                        </button>
+                        <button class="btn btn--ghost" onclick="window.location.href='repair-game.html'">
+                            ← Retour au jeu
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 3rem; padding: 2rem; border-radius: 16px; background: rgba(79, 70, 229, 0.1); border: 1px solid rgba(165, 180, 252, 0.3);">
+                        <h3 style="color: #f8fafc; margin-bottom: 1rem;">Ce que vous allez découvrir :</h3>
+                        <ul style="text-align: left; color: #cbd5e1; line-height: 2;">
+                            <li>🎯 Choisir la bonne distribution Linux</li>
+                            <li>⚙️ Vérifier la compatibilité de votre PC</li>
+                            <li>💾 Comprendre le partitionnement</li>
+                            <li>👤 Créer votre compte utilisateur</li>
+                            <li>⏳ Simuler l'installation complète</li>
+                            <li>🖥️ Découvrir le bureau Linux</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>
+                Nuit de l'Info 2025 · Projet NIRD · Vers un numérique plus libre et plus sobre.
+            </p>
+        </footer>
+    </div>
+
+    <script type="module">
+        // Menu Burger
+        const burgerBtn = document.getElementById("burgerBtn");
+        const navMenu = document.getElementById("navMenu");
+
+        if (burgerBtn && navMenu) {
+            burgerBtn.addEventListener("click", () => {
+                navMenu.classList.toggle("open");
+                burgerBtn.classList.toggle("is-open");
+            });
+
+            navMenu.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", () => {
+                    navMenu.classList.remove("open");
+                    burgerBtn.classList.remove("is-open");
+                });
+            });
+        }
+
+        // Particules
+        const particlesCanvas = document.getElementById("particlesCanvas");
+        if (particlesCanvas) {
+            const ctx = particlesCanvas.getContext("2d");
+            let width = 0;
+            let height = 0;
+            let particles = [];
+
+            const resetParticles = () => {
+                const count = Math.min(100, Math.floor((width * height) / 20000));
+                particles = Array.from({ length: count }, () => ({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    size: Math.random() * 2 + 0.5
+                }));
+            };
+
+            const resizeParticles = () => {
+                width = particlesCanvas.width = window.innerWidth;
+                height = particlesCanvas.height = window.innerHeight;
+                resetParticles();
+            };
+
+            const drawParticles = () => {
+                ctx.clearRect(0, 0, width, height);
+
+                for (const p of particles) {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                    const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+                    gradient.addColorStop(0, 'rgba(165, 180, 252, 0.8)');
+                    gradient.addColorStop(1, 'rgba(165, 180, 252, 0)');
+
+                    ctx.beginPath();
+                    ctx.fillStyle = gradient;
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 150) {
+                            const alpha = (1 - dist / 150) * 0.3;
+                            ctx.strokeStyle = `rgba(94, 234, 212, ${alpha})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            };
+
+            const animateParticles = () => {
+                drawParticles();
+                requestAnimationFrame(animateParticles);
+            };
+
+            window.addEventListener("resize", resizeParticles);
+            resizeParticles();
+            animateParticles();
+        }
+    </script>
+</body>
+
+</html>

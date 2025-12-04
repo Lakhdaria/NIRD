@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIRD – Simulateur d'Installation Linux</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles/styles_global.css">
+    <link rel="stylesheet" href="styles/linux-simulator.css">
+</head>
+
+<body>
+    <canvas id="particlesCanvas" aria-hidden="true"></canvas>
+    <div class="bg"></div>
+
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="header__brand">
+                <div class="brand-logo">N</div>
+                <div class="brand-text">
+                    <span class="brand-title">NIRD</span>
+                    <span class="brand-sub">Simulateur Linux Interactif</span>
+                </div>
+            </div>
+
+            <nav class="nav" id="navMenu">
+                <a href="index.html">Accueil</a>
+                <a href="repair-game.html">Jeu de réparation</a>
+                <a href="linux-simulator.html" class="is-active">Installation Linux</a>
+            </nav>
+
+            <button class="header__cta" onclick="window.location.href='index.html'">
+                <span>Retour au site</span>
+            </button>
+
+            <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+        <main class="simulator-container">
+            <!-- Barre de progression globale -->
+            <div class="progress-bar-container">
+                <div class="progress-bar">
+                    <div class="progress-bar__fill" id="globalProgress"></div>
+                </div>
+                <div class="progress-steps">
+                    <div class="step active" data-step="1">Distribution</div>
+                    <div class="step" data-step="2">Vérification</div>
+                    <div class="step" data-step="3">Disque</div>
+                    <div class="step" data-step="4">Utilisateur</div>
+                    <div class="step" data-step="5">Installation</div>
+                    <div class="step" data-step="6">Démarrage</div>
+                </div>
+            </div>
+
+            <!-- ÉTAPE 1 : Choix de la distribution -->
+            <section class="simulator-step active" id="step1">
+                <h2 class="step-title">Choisissez votre distribution Linux 🐧</h2>
+                <p class="step-description">
+                    Chaque distribution est gratuite et open-source. Choisissez celle qui vous convient !
+                </p>
+
+                <div class="distros-grid">
+                    <div class="distro-card" data-distro="ubuntu">
+                        <div class="distro-icon">🟠</div>
+                        <h3>Ubuntu</h3>
+                        <p>La plus populaire et stable. Parfaite pour débuter.</p>
+                        <div class="distro-tags">
+                            <span class="tag">Stable</span>
+                            <span class="tag">Communauté</span>
+                        </div>
+                    </div>
+
+                    <div class="distro-card" data-distro="mint">
+                        <div class="distro-icon">🟢</div>
+                        <h3>Linux Mint</h3>
+                        <p>Idéale pour recycler un vieux PC. Interface familière.</p>
+                        <div class="distro-tags">
+                            <span class="tag">Léger</span>
+                            <span class="tag">Recommandé</span>
+                        </div>
+                    </div>
+
+                    <div class="distro-card" data-distro="debian">
+                        <div class="distro-icon">🔴</div>
+                        <h3>Debian</h3>
+                        <p>Solide et fiable. La base de nombreuses distributions.</p>
+                        <div class="distro-tags">
+                            <span class="tag">Robuste</span>
+                            <span class="tag">Expert</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--large" id="continueStep1" style="display: none;">
+                    Continuer avec <span id="selectedDistroName"></span> →
+                </button>
+            </section>
+
+            <!-- ÉTAPE 2 : Vérification de la configuration -->
+            <section class="simulator-step" id="step2">
+                <h2 class="step-title">Vérification de la configuration ⚙️</h2>
+                <p class="step-description">
+                    Vérifions que votre ordinateur est compatible avec Linux
+                </p>
+
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="btn-close"></span>
+                            <span class="btn-minimize"></span>
+                            <span class="btn-maximize"></span>
+                        </div>
+                        <span class="terminal-title">Configuration Check</span>
+                    </div>
+                    <div class="terminal-body" id="terminalOutput">
+                        <div class="terminal-prompt">$</div>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--large" id="startCheck">
+                    🔍 Lancer la vérification
+                </button>
+                <button class="btn btn--primary btn--large" id="continueStep2" style="display: none;">
+                    Tout est compatible ! Continuer →
+                </button>
+            </section>
+
+            <!-- ÉTAPE 3 : Partitionnement du disque -->
+            <section class="simulator-step" id="step3">
+                <h2 class="step-title">Configuration du disque 💾</h2>
+                <p class="step-description">
+                    Comment souhaitez-vous installer Linux ?
+                </p>
+
+                <div class="disk-visualization">
+                    <div class="disk-bar" id="diskBar">
+                        <div class="disk-segment windows">
+                            <span>Windows (100 GB)</span>
+                        </div>
+                    </div>
+                    <div class="disk-legend">
+                        <div class="legend-item">
+                            <span class="color-box windows-color"></span>
+                            <span>Windows</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="color-box linux-color"></span>
+                            <span>Linux</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="partition-options">
+                    <div class="option-card" data-option="erase">
+                        <div class="option-icon">🗑️</div>
+                        <h3>Effacer et installer</h3>
+                        <p>Supprimer Windows et utiliser tout le disque pour Linux</p>
+                        <span class="recommended-badge">Recommandé pour vieux PC</span>
+                    </div>
+
+                    <div class="option-card" data-option="alongside">
+                        <div class="option-icon">🔀</div>
+                        <h3>Installer à côté</h3>
+                        <p>Garder Windows et créer une partition pour Linux (dual boot)</p>
+                        <span class="recommended-badge">Garde Windows</span>
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--large" id="continueStep3" style="display: none;">
+                    Valider le partitionnement →
+                </button>
+            </section>
+
+            <!-- ÉTAPE 4 : Création du compte utilisateur -->
+            <section class="simulator-step" id="step4">
+                <h2 class="step-title">Créez votre compte 👤</h2>
+                <p class="step-description">
+                    Configurez votre identité sur votre nouveau système Linux
+                </p>
+
+                <div class="user-creation">
+                    <div class="avatar-container">
+                        <div class="linux-avatar" id="linuxAvatar">
+                            <div class="penguin">🐧</div>
+                            <div class="avatar-mood" id="avatarMood">😊</div>
+                        </div>
+                    </div>
+
+                    <form class="user-form" id="userForm">
+                        <div class="form-group">
+                            <label for="username">Nom d'utilisateur</label>
+                            <input type="text" id="username" placeholder="ex: jean" required>
+                            <span class="form-hint">Lettres minuscules et chiffres uniquement</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                            <div class="password-strength" id="passwordStrength">
+                                <div class="strength-bar"></div>
+                                <span class="strength-text">Force : Faible</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hostname">Nom de l'ordinateur (optionnel)</label>
+                            <input type="text" id="hostname" placeholder="ex: mon-pc-linux">
+                            <span class="form-hint">Ce nom sera visible sur votre réseau</span>
+                        </div>
+                    </form>
+                </div>
+
+                <button class="btn btn--primary btn--large" id="continueStep4" disabled>
+                    Créer le compte →
+                </button>
+            </section>
+
+            <!-- ÉTAPE 5 : Installation -->
+            <section class="simulator-step" id="step5">
+                <h2 class="step-title">Installation en cours... ⏳</h2>
+                <p class="step-description">
+                    Linux s'installe sur votre ordinateur. Cela peut prendre quelques minutes.
+                </p>
+
+                <div class="installation-container">
+                    <div class="install-progress">
+                        <div class="install-bar">
+                            <div class="install-bar__fill" id="installProgress"></div>
+                        </div>
+                        <div class="install-percentage" id="installPercentage">0%</div>
+                    </div>
+
+                    <div class="install-messages" id="installMessages">
+                        <div class="install-message">Préparation de l'installation...</div>
+                    </div>
+
+                    <div class="install-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ÉTAPE 6 : Premier démarrage -->
+            <section class="simulator-step" id="step6">
+                <!-- Boot screen -->
+                <div class="boot-screen" id="bootScreen">
+                    <div class="boot-logo" id="bootLogo">
+                        <div class="logo-circle">🐧</div>
+                        <div class="boot-text">Booting Linux...</div>
+                    </div>
+                </div>
+
+                <!-- Desktop final -->
+                <div class="linux-desktop" id="linuxDesktop" style="display: none;">
+                    <div class="desktop-wallpaper">
+                        <div class="desktop-icons">
+                            <div class="desktop-icon">
+                                <div class="icon">📁</div>
+                                <span>Fichiers</span>
+                            </div>
+                            <div class="desktop-icon">
+                                <div class="icon">⚙️</div>
+                                <span>Paramètres</span>
+                            </div>
+                            <div class="desktop-icon">
+                                <div class="icon">🌐</div>
+                                <span>Navigateur</span>
+                            </div>
+                        </div>
+
+                        <div class="welcome-message">
+                            <h2>🎉 Félicitations !</h2>
+                            <p>Vous avez simulé votre première installation Linux !</p>
+                            <p class="message-highlight">
+                                Vous êtes maintenant prêt à recycler un ancien ordinateur dans la vraie vie.
+                            </p>
+                            <div class="final-actions">
+                                <button class="btn btn--primary" onclick="window.location.href='index.html'">
+                                    Retour à l'accueil
+                                </button>
+                                <button class="btn btn--ghost" onclick="location.reload()">
+                                    Recommencer la simulation
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="taskbar">
+                        <div class="taskbar-left">
+                            <div class="app-launcher">
+                                <span>🐧</span>
+                                <span>Applications</span>
+                            </div>
+                        </div>
+                        <div class="taskbar-center">
+                            <span class="time" id="desktopTime">14:32</span>
+                        </div>
+                        <div class="taskbar-right">
+                            <div class="system-tray">
+                                <span>🔊</span>
+                                <span>📶</span>
+                                <span>🔋</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/linux-simulator.js"></script>
+</body>
+
+</html>
