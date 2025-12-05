@@ -17,32 +17,33 @@
     <canvas id="particlesCanvas" aria-hidden="true"></canvas>
     <div class="bg"></div>
 
-    <div class="page page--game">
-        <!-- Header -->
+    <div class="page">
+          <!-- Header -->
         <header class="header">
             <div class="header__brand">
-                <div class="brand-logo">N</div>
+                <div class="brand-logo">
+                    <img src="assets/images/logo.jpg" alt="DoctorPC">
+                </div>
                 <div class="brand-text">
-                    <span class="brand-title">NIRD</span>
+                    <span class="brand-title">DoctorPC</span>
                     <span class="brand-sub">Numérique Inclusif · Responsable · Durable</span>
                 </div>
             </div>
 
             <nav class="nav" id="navMenu">
-                <a href="index.html">Accueil</a>
-                <a href="repair-game.html" class="is-active">Jeu de réparation</a>
+                <a href="index.html" >Accueil</a>
+                <a href="repair-game.html"  class="is-active">Jeu de réparation</a>
                 <a href="page-linux.html">Installation Linux</a>
-                <a href="avis.html">Donnez votre avis</a>
+                <a href="#" aria-label="Parler au ChatBot">Parler au ChatBot</a>
+                <a href="avis.html">Donner un avis</a>
             </nav>
 
-            <button class="header__cta" onclick="window.location.href='index.html'">
-                <span>Essayer Chatbruti</span>
-            </button>
 
             <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
                 <span></span><span></span><span></span>
             </button>
         </header>
+
 
         <main>
             <!-- Introduction pédagogique -->
@@ -58,29 +59,29 @@
 
             <!-- Zone de jeu principale -->
             <section class="game-container">
-                <!-- Barre de vie et progression en haut -->
-                <div class="health-bar-container">
-                    <div class="health-info">
-                        <div class="heart-icon" id="heartIcon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                            </svg>
-                        </div>
-                        <div class="health-text">
-                            <span class="health-label">État du PC</span>
-                            <span class="health-percentage" id="healthPercentage">0%</span>
-                        </div>
-                    </div>
-                    <div class="health-bar">
-                        <div class="health-bar__fill" id="healthBarFill"></div>
-                    </div>
-                    <p class="health-status" id="healthStatus">Le PC attend d'être réparé...</p>
-                </div>
-
                 <!-- Zone principale : Scène 3D + Composants côte à côte -->
                 <div class="game-main">
                     <!-- Scène 3D avec la tour -->
                     <div class="game-left">
+                        <!-- Barre de vie MINI au-dessus du 3D -->
+                        <div class="health-bar-container">
+                            <div class="health-info">
+                                <div class="heart-icon" id="heartIcon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                </div>
+                                <div class="health-text">
+                                    <span class="health-label">État du PC</span>
+                                    <span class="health-percentage" id="healthPercentage">0%</span>
+                                </div>
+                            </div>
+                            <div class="health-bar">
+                                <div class="health-bar__fill" id="healthBarFill"></div>
+                            </div>
+                            <p class="health-status" id="healthStatus">Le PC attend d'être réparé...</p>
+                        </div>
+
                         <div class="game-3d">
                             <canvas id="gameCanvas"></canvas>
                             <div class="game-instructions" id="gameInstructions">
@@ -206,7 +207,7 @@
                         <span class="stat-label">Bonnes réponses</span>
                     </div>
                 </div>
-                <a href="page-linux.html" class="btn btn--primary">
+                <a href="linux-simulator.html" class="btn btn--primary">
                     Continuer l'aventure →
                 </a>
                 <button class="btn btn--ghost" onclick="window.location.href='index.html'">

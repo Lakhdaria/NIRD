@@ -20,6 +20,18 @@ if (burgerBtn && navMenu) {
   });
 }
 
+// Révéler le contenu bas de page au clic
+const revealContentBtn = document.getElementById("revealContentBtn");
+if (revealContentBtn) {
+  revealContentBtn.addEventListener("click", () => {
+    document.body.classList.add("content-visible");
+    const content = document.querySelector(".content-sections");
+    if (content) {
+      content.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
+
 // Reveal on scroll avec stagger
 const revealEls = document.querySelectorAll(".reveal");
 
@@ -180,7 +192,7 @@ if (canvas) {
     100
   );
 
-  camera.position.set(1.8, 1.2, 1.8);
+  camera.position.set(1.6, 1.4, 1.6);
 
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -225,18 +237,22 @@ if (canvas) {
     "assets/models/retro_computer.glb",
     (gltf) => {
       const retroPC = gltf.scene;
-      retroPC.scale.set(2.5, 2.5, 2.5);
-      retroPC.rotation.y = Math.PI / 2;
+      retroPC.scale.set(2.0, 2.0, 2.0);
+      // Orient the model to face the camera at start
+      retroPC.rotation.y = -20;
       scene.add(retroPC);
 
       const box = new THREE.Box3().setFromObject(retroPC);
       const center = box.getCenter(new THREE.Vector3());
-      controls.target.copy(center);
+      const size = box.getSize(new THREE.Vector3());
+      // Recentre le modèle pour qu'il soit au cœur de la scène et le remonte de façon proportionnelle à sa taille
+      const lift = size.y * 0.2;
+      retroPC.position.set(-center.x, -center.y + lift, -center.z);
 
-      camera.position.addVectors(
-        center,
-        new THREE.Vector3(1.8, 1.2, 1.8)
-      );
+      const target = new THREE.Vector3(0, 0, 0);
+      controls.target.copy(target);
+      camera.position.set(1.6, 1.4, 1.6);
+      camera.lookAt(target);
     },
     undefined,
     (err) => console.error("Erreur chargement modèle :", err)
@@ -257,3 +273,22 @@ if (canvas) {
   };
   animate();
 }
+
+// Hero gallery (fade one by one)
+const galleryTrack = document.querySelector(".hero__gallery-track");
+if (galleryTrack) {
+  const slides = Array.from(galleryTrack.querySelectorAll("img"));
+  let idx = 0;
+  const showSlide = (i) => {
+    slides.forEach((img, j) => img.classList.toggle("is-active", i === j));
+  };
+  if (slides.length > 0) {
+    showSlide(idx);
+    setInterval(() => {
+      idx = (idx + 1) % slides.length;
+      showSlide(idx);
+    }, 2200);
+  }
+}
+
+

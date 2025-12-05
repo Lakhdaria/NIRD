@@ -18,25 +18,26 @@
     <div class="bg"></div>
 
     <div class="page">
-        <!-- Header -->
+       <!-- Header -->
         <header class="header">
             <div class="header__brand">
-                <div class="brand-logo">N</div>
+                <div class="brand-logo">
+                    <img src="assets/images/logo.jpg" alt="DoctorPC">
+                </div>
                 <div class="brand-text">
-                    <span class="brand-title">NIRD</span>
-                    <span class="brand-sub">Simulateur Linux Interactif</span>
+                    <span class="brand-title">DoctorPC</span>
+                    <span class="brand-sub">Numérique Inclusif · Responsable · Durable</span>
                 </div>
             </div>
 
             <nav class="nav" id="navMenu">
-                <a href="index.html">Accueil</a>
+                <a href="index.html" >Accueil</a>
                 <a href="repair-game.html">Jeu de réparation</a>
-                <a href="linux-simulator.html" class="is-active">Installation Linux</a>
+                <a href="page-linux.html" class="is-active">Installation Linux</a>
+                <a href="#" aria-label="Parler au ChatBot">Parler au ChatBot</a>
+                <a href="avis.html">Donner un avis</a>
             </nav>
 
-            <button class="header__cta" onclick="window.location.href='index.html'">
-                <span>Retour au site</span>
-            </button>
 
             <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
                 <span></span><span></span><span></span>
@@ -79,8 +80,10 @@
 
                     <div class="distro-card" data-distro="mint">
                         <div class="distro-icon">🟢</div>
-                        <h3>Linux Mint</h3>
-                        <p>Idéale pour recycler un vieux PC. Interface familière.</p>
+                        <h3>Linux NIRD</h3>
+                        <p>Elle est créée, testée et maintenue par des enseignants et acteurs de l’éducation.</p>
+                        <p>Elle est légère (Linux Mint + Xfce + dock Plank). Ainsi elle pour tourner sur des machines
+                            même anciennes.</p>
                         <div class="distro-tags">
                             <span class="tag">Léger</span>
                             <span class="tag">Recommandé</span>
@@ -260,7 +263,7 @@
                 <!-- Desktop final -->
                 <div class="linux-desktop" id="linuxDesktop" style="display: none;">
                     <div class="desktop-wallpaper">
-                        
+
                         <!-- Icônes du bureau (grille centrée) -->
                         <div class="desktop-icons-grid">
                             <div class="desktop-icon" data-window="terminal">
@@ -286,8 +289,8 @@
                             <h2>🎉 Félicitations !</h2>
                             <p>Vous avez terminé l'installation de Linux !</p>
                             <p class="message-highlight">
-                                Explorez maintenant votre nouveau système : ouvrez le 
-                                <strong>Terminal</strong> pour taper des commandes, 
+                                Explorez maintenant votre nouveau système : ouvrez le
+                                <strong>Terminal</strong> pour taper des commandes,
                                 parcourez vos <strong>Fichiers</strong>, ou naviguez sur le web !
                             </p>
                             <div class="final-actions">
@@ -302,7 +305,7 @@
 
                         <!-- Container pour les fenêtres -->
                         <div class="windows-container" id="windowsContainer">
-                            
+
                             <!-- Fenêtre Terminal -->
                             <div class="os-window terminal-window" id="window-terminal" data-window="terminal">
                                 <div class="window-header terminal-header-dark">
@@ -315,17 +318,19 @@
                                 <div class="window-content terminal-content" id="terminalWindow">
                                     <div class="terminal-output" id="terminalOutputDesktop">
                                         <div class="terminal-welcome">
-Bienvenue dans le Terminal Linux ! 🐧
-Tapez "help" pour voir les commandes disponibles.
+                                            Bienvenue dans le Terminal Linux ! 🐧
+                                            Tapez "help" pour voir les commandes disponibles.
                                         </div>
                                     </div>
                                     <div class="terminal-input-line">
-                                        <span class="terminal-prompt-text" id="terminalPrompt">utilisateur@linux-sim:~$</span>
-                                        <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false">
+                                        <span class="terminal-prompt-text"
+                                            id="terminalPrompt">utilisateur@linux-sim:~$</span>
+                                        <input type="text" id="terminalInput" class="terminal-input" autocomplete="off"
+                                            spellcheck="false">
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Fenêtre Paramètres -->
                             <div class="os-window" id="window-settings" data-window="settings">
                                 <div class="window-header">
@@ -471,7 +476,8 @@ Tapez "help" pour voir les commandes disponibles.
                                     <button class="window-close" data-close="editor">✕</button>
                                 </div>
                                 <div class="window-content editor-content">
-                                    <textarea id="editorTextarea" placeholder="Commencez à écrire..." spellcheck="false"></textarea>
+                                    <textarea id="editorTextarea" placeholder="Commencez à écrire..."
+                                        spellcheck="false"></textarea>
                                     <div class="editor-footer">
                                         <div class="editor-info">
                                             <span id="editorLineCount">Lignes: 0</span>
@@ -479,7 +485,8 @@ Tapez "help" pour voir les commandes disponibles.
                                         </div>
                                         <div class="editor-actions">
                                             <button class="btn btn--ghost btn--sm" id="editorCancel">Annuler</button>
-                                            <button class="btn btn--primary btn--sm" id="editorSave">💾 Enregistrer</button>
+                                            <button class="btn btn--primary btn--sm" id="editorSave">💾
+                                                Enregistrer</button>
                                         </div>
                                     </div>
                                 </div>

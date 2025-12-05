@@ -20,9 +20,11 @@
         <!-- Header -->
         <header class="header">
             <div class="header__brand">
-                <div class="brand-logo">N</div>
+                <div class="brand-logo">
+                    <img src="assets/images/logo.jpg" alt="DoctorPC">
+                </div>
                 <div class="brand-text">
-                    <span class="brand-title">NIRD</span>
+                    <span class="brand-title">DoctorPC</span>
                     <span class="brand-sub">Numérique Inclusif · Responsable · Durable</span>
                 </div>
             </div>
@@ -31,12 +33,10 @@
                 <a href="index.html" class="is-active">Accueil</a>
                 <a href="repair-game.html">Jeu de réparation</a>
                 <a href="page-linux.html">Installation Linux</a>
-                <a href="avis.html">Donnez votre avis</a>
+                <a href="#" aria-label="Parler au ChatBot">Parler au ChatBot</a>
+                <a href="avis.html">Donner un avis</a>
             </nav>
 
-            <button class="header__cta" onclick="window.location.href='index.html'">
-                <span>Essayer Chatbruti</span>
-            </button>
 
             <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
                 <span></span><span></span><span></span>
@@ -51,31 +51,47 @@
                     </h1>
 
                     <p class="hero__subtitle">
-                        À la fin du support de Windows 10, beaucoup d'établissements restent
-                        dépendants des grandes plateformes et d'un matériel qu'on déclare trop vite "obsolète".
+                        Beaucoup d’établissements restent dépendants de grandes plateformes et 
+                        d’un matériel vite déclaré “obsolète”. NIRD propose une alternative fondée sur le libre, 
+                        le réemploi et la sobriété. Notre site explique comment gérer cette obsolescence et passer à l’action.
                     </p>
 
-                    <p class="hero__subtitle hero__subtitle--small">
-                        La démarche NIRD propose une autre voie : logiciels libres, réemploi,
-                        sobriété numérique et travail en commun. Votre application doit aider à
-                        comprendre cette démarche et à passer à l'action.
-                    </p>
-
+                    
                     <div class="hero__buttons">
                         <button class="btn btn--primary"
-                            onclick="document.querySelector('#actors').scrollIntoView({behavior:'smooth'})">
-                            Voir qui porte le projet
+                            onclick="window.location.href='repair-game.html'">
+                            Répare ton ordinateur
                         </button>
-                        <button class="btn btn--ghost"
-                            onclick="document.querySelector('#pc3d').scrollIntoView({behavior:'smooth'})">
-                            Explorer un PC en 3D
+                        <button class="btn btn--ghost" type="button" id="revealContentBtn">
+                            En savoir plus
                         </button>
                     </div>
 
-                    <div class="hero__tags">
-                        <span class="tag">Nuit de l'Info 2025</span>
-                        <span class="tag tag--outline">Production sous licence libre</span>
+                    <div class="hero__info hero__info--wide">
+                        <div class="hero__info-text">
+                            <p>Crée ta carte-compétences et vois ton trait de personnalité.</p>
+                            <button class="btn btn--ghost btn--small"
+                                onclick="window.location.href='carte.html'" >
+                                Ouvrir la carte
+                            </button>
+                        </div>
+
+                        <div class="hero__info-images">
+                            <div class="hero__info-track">
+                                <img src="assets/images/technique.jpg" alt="Profil technique">
+                                <img src="assets/images/ecolo.jpg" alt="Profil écolo">
+                                <img src="assets/images/innovatif.jpg" alt="Profil innovant">
+                                <img src="assets/images/social.jpg" alt="Profil social">
+                                <img src="assets/images/creatif.jpg" alt="Profil créatif">
+                                <img src="assets/images/technique.jpg" alt="Profil technique">
+                                <img src="assets/images/ecolo.jpg" alt="Profil écolo">
+                                <img src="assets/images/innovatif.jpg" alt="Profil innovant">
+                                <img src="assets/images/social.jpg" alt="Profil social">
+                                <img src="assets/images/creatif.jpg" alt="Profil créatif">
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
                 <aside class="hero__right">
@@ -85,6 +101,7 @@
                 </aside>
             </section>
 
+            <div class="content-sections">
             <section class="section" id="actors">
                 <header class="section__head">
                     <h2>Qui est impliqué dans NIRD ?</h2>
@@ -246,9 +263,11 @@
                     </div>
                 </div>
             </section>
+            </div>
+
         </main>
 
-        <footer class="footer">
+        <footer class="footer content-sections">
             <p>
                 Nuit de l'Info 2025 · Projet NIRD · Vers un numérique plus libre et plus sobre.
             </p>
@@ -268,3 +287,5 @@
 </body>
 
 </html>
+
+

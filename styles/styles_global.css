@@ -54,16 +54,163 @@ body {
   z-index: 1;
 }
 
+.content-sections {
+  display: none;
+}
+
+body.content-visible .content-sections {
+  display: block;
+}
+
+
+.hero__info {
+  margin-top: 0.8rem;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.hero__info p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  flex: 1 1 240px;
+}
+
+.btn--small {
+  padding: 0.55rem 1.1rem;
+  font-size: 0.9rem;
+}
+
+.hero__info--wide .btn--small {
+  padding: 1.15rem 2.1rem;
+  font-size: 1.1rem;
+  min-width: 210px;
+}
+
+.hero__info--wide {
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.hero__info--wide .hero__info-text {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100px;
+  align-items: flex-start;
+}
+
+.hero__info--wide .hero__info-text .btn--ghost {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero__info-images {
+  flex: 1;
+  position: relative;
+  height: 100px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.6);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero__info-images::before,
+.hero__info-images::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 18%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero__info-images::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.8), transparent);
+}
+
+.hero__info-images::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(15, 23, 42, 0.8), transparent);
+}
+
+.hero__info-track {
+  position: absolute;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  height: 100%;
+  padding: 0 0.75rem;
+  animation: heroTrack 16s linear infinite;
+}
+
+.hero__info-images img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+  animation: driftGlow 8s ease-in-out infinite;
+}
+
+.hero__info-images img:nth-child(2n) {
+  animation-delay: 1s;
+}
+
+.hero__info-images img:nth-child(3n) {
+  animation-delay: 2s;
+}
+
+@keyframes driftGlow {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    filter: saturate(0.95);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+  50% {
+    transform: translateY(-3px) rotate(-2deg) scale(1.03);
+    filter: saturate(1.08) brightness(1.03);
+    box-shadow: 0 12px 36px rgba(79, 70, 229, 0.25);
+  }
+}
+
+@keyframes heroTrack {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* ---------- Header ---------- */
 .header {
-  position: sticky;
-  top: 1rem;
+
   z-index: 100;
   display: flex;
   align-items: center;
   gap: 2rem;
   padding: 1rem 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
   border-radius: 20px;
   background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
@@ -118,28 +265,22 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #f97316 100%);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   font-size: 1.1rem;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-  position: relative;
+  box-shadow: none;
   overflow: hidden;
 }
 
-.brand-logo::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.header__brand:hover .brand-logo::before {
-  opacity: 1;
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: multiply;
 }
 
 .brand-text {
@@ -273,11 +414,12 @@ body {
 /* ---------- Hero ---------- */
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.1fr) minmax(420px, 0.9fr);
   gap: 3rem;
   padding-top: 3rem;
   padding-bottom: 4rem;
   animation: fadeInUp 0.8s ease-out 0.2s both;
+  align-items: center;
 }
 
 @keyframes fadeInUp {
@@ -294,7 +436,9 @@ body {
 .hero__left {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .hero__title {
@@ -305,6 +449,18 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Fix height so subtitle never moves when the title wraps */
+  display: block;
+  height: 2.3em;
+  overflow: hidden;
+}
+
+#typewriter {
+  display: block;
+  height: 100%;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .cursor {
@@ -369,11 +525,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  justify-self: end;
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  max-width: 520px;
+  align-self: start;
+  margin-top: 1.8rem;
 }
 
 .pc3d__canvas {
   width: 100%;
-  height: 450px;
+  height: 380px;
   border-radius: 20px;
   background: rgba(15, 23, 42, 0.5);
   border: 1px solid rgba(148, 163, 184, 0.2);
@@ -579,6 +742,31 @@ body {
 
 .card:hover::before {
   opacity: 1;
+}
+
+.card input,
+.card select,
+.card textarea {
+  width: 100%;
+  margin-top: 0.6rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.7);
+  color: #e5e7eb;
+  font: inherit;
+}
+
+.card input:focus,
+.card select:focus,
+.card textarea:focus {
+  outline: 1px solid rgba(99, 102, 241, 0.5);
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.card textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
 /* ---------- PC 3D Info ---------- */
@@ -813,7 +1001,7 @@ body {
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .page {
     padding-inline: 1.5rem;
   }
@@ -825,10 +1013,11 @@ body {
 
   .hero__right {
     order: -1;
+    align-self: center;
   }
 
   .pc3d__canvas {
-    height: 350px;
+    height: 300px;
   }
 
   .grid--3,
@@ -842,6 +1031,16 @@ body {
 
   .journey__side {
     position: static;
+  }
+
+  .hero__info--wide {
+    flex-direction: column;
+  }
+
+  .hero__info--wide .hero__gallery {
+    width: 100px;
+    max-width: 100px;
+    min-height: 80px;
   }
 }
 

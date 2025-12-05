@@ -105,7 +105,7 @@ function initStep1() {
             // Afficher le nom
             const distroNames = {
                 'ubuntu': 'Ubuntu',
-                'mint': 'Linux Mint',
+                'mint': 'Linux NIRD',
                 'debian': 'Debian'
             };
             distroNameSpan.textContent = distroNames[distro];
@@ -451,7 +451,7 @@ function initDesktop() {
     if (osName && SimulatorState.selectedDistro) {
         const distroNames = {
             'ubuntu': 'Linux Ubuntu 24.04',
-            'mint': 'Linux Mint 21.3',
+            'mint': 'Linux NIRD 21.3',
             'debian': 'Debian 12 Bookworm'
         };
         osName.textContent = distroNames[SimulatorState.selectedDistro] || 'Linux';
