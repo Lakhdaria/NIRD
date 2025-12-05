@@ -1269,6 +1269,36 @@ body.content-visible .content-sections {
 }
 
 /* ---------- Responsive ---------- */
+
+/* ===== Tablette paysage et petits écrans (max-width: 1024px) ===== */
+@media (max-width: 1024px) {
+  .page {
+    padding-inline: 1.5rem;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+    gap: 2rem;
+  }
+
+  .hero__right {
+    max-width: 400px;
+  }
+
+  .pc3d__canvas {
+    height: 320px;
+  }
+
+  .section {
+    padding: 2.5rem 2rem;
+  }
+
+  .journey {
+    gap: 2rem;
+  }
+}
+
+/* ===== Tablette portrait (max-width: 900px) ===== */
 @media (max-width: 900px) {
   .page {
     padding-inline: 1.5rem;
@@ -1277,15 +1307,52 @@ body.content-visible .content-sections {
   .hero {
     grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
+    text-align: center;
+  }
+
+  .hero__left {
+    align-items: center;
   }
 
   .hero__right {
     order: -1;
     align-self: center;
+    justify-self: center;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .hero__buttons {
+    justify-content: center;
   }
 
   .pc3d__canvas {
     height: 300px;
+  }
+
+  .hero__info {
+    text-align: left;
+  }
+
+  .hero__info--wide {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__info--wide .hero__info-text {
+    flex: 1 1 auto;
+    height: auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero__info--wide .hero__info-text .btn--ghost {
+    align-self: center;
+  }
+
+  .hero__info-images {
+    width: 100%;
+    height: 120px;
   }
 
   .grid--3,
@@ -1298,6 +1365,10 @@ body.content-visible .content-sections {
     gap: 1.5rem;
   }
 
+  .footer__brand {
+    grid-column: span 2;
+  }
+
   .journey {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1306,26 +1377,42 @@ body.content-visible .content-sections {
     position: static;
   }
 
-  .hero__info--wide {
+  .pc3d {
     flex-direction: column;
+    text-align: center;
   }
 
-  .hero__info--wide .hero__gallery {
-    width: 100px;
-    max-width: 100px;
-    min-height: 80px;
+  .pc3d__info {
+    width: 100%;
+  }
+
+  .pc3d__info ul {
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
+/* ===== Mobile large (max-width: 768px) ===== */
 @media (max-width: 768px) {
+  /* Masquer le modèle 3D sur mobile */
+  .hero__right {
+    display: none;
+  }
+
   .header {
     padding: 0.8rem 1rem;
-    top: 0.5rem;
+    gap: 1rem;
+  }
+
+  .brand-text {
+    display: none;
   }
 
   .nav {
     position: fixed;
-    inset: 80px 1rem auto;
+    inset: 70px 1rem auto;
     flex-direction: column;
     gap: 0;
     padding: 0;
@@ -1338,6 +1425,7 @@ body.content-visible .content-sections {
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
   }
 
   .nav.open {
@@ -1351,6 +1439,7 @@ body.content-visible .content-sections {
     padding: 1rem 1.5rem;
     border-radius: 0;
     border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    text-align: left;
   }
 
   .nav a:first-child {
@@ -1360,6 +1449,12 @@ body.content-visible .content-sections {
   .nav a:last-child {
     border-radius: 0 0 16px 16px;
     border-bottom: none;
+  }
+
+  .nav a:hover,
+  .nav a.is-active {
+    transform: none;
+    background: rgba(79, 70, 229, 0.15);
   }
 
   .header__cta {
@@ -1372,16 +1467,49 @@ body.content-visible .content-sections {
   }
 
   .hero {
-    padding-top: 2rem;
-    padding-bottom: 3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 2.5rem;
   }
 
   .hero__title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    height: auto;
+    min-height: 2.2em;
   }
 
-  .pc3d__canvas {
-    height: 300px;
+  .hero__subtitle {
+    font-size: 1rem;
+  }
+
+  .hero__info {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .hero__info p {
+    flex: none;
+    text-align: center;
+  }
+
+  .hero__info--wide .hero__info-text {
+    gap: 0.8rem;
+  }
+
+  .hero__info--wide .btn--small {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    min-width: auto;
+    width: 100%;
+  }
+
+  .hero__info-images {
+    height: 100px;
+  }
+
+  .hero__info-images img {
+    width: 70px;
+    height: 70px;
   }
 
   .footer {
@@ -1390,15 +1518,45 @@ body.content-visible .content-sections {
 
   .footer__main {
     grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .footer__brand {
+    grid-column: span 1;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer__brand-header {
+    justify-content: center;
+  }
+
+  .footer__social {
+    justify-content: center;
+  }
+
+  .footer__column {
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer__column h4 {
+    justify-content: center;
+  }
+
+  .footer__links {
+    align-items: center;
   }
 
   .footer__bottom {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
   }
 
   .footer__legal {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .section {
@@ -1406,45 +1564,361 @@ body.content-visible .content-sections {
     margin-top: 3rem;
   }
 
+  .section__head h2 {
+    font-size: 1.6rem;
+  }
+
+  .section__head p {
+    font-size: 0.95rem;
+  }
+
   .grid--3,
   .resources {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .pc3d {
+  .step {
     flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .step:hover {
+    transform: translateY(-4px);
+  }
+
+  .journey__side {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .journey__side ul {
+    text-align: left;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pc3d__note {
+    text-align: left;
   }
 }
 
-@media (max-width: 480px) {
+/* ===== Mobile medium (max-width: 640px) ===== */
+@media (max-width: 640px) {
   .page {
     padding-inline: 1rem;
+    padding-bottom: 3rem;
   }
 
-  .footer {
-    padding: 2.3rem 1.25rem 1.9rem;
+  .hero__title {
+    font-size: 1.6rem;
   }
 
-  .footer__brand {
-    align-items: flex-start;
-  }
-
-  .footer__bottom {
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .footer__legal {
-    width: 100%;
-    gap: 0.75rem;
+  .hero__subtitle {
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 
   .hero__buttons {
     flex-direction: column;
+    width: 100%;
+  }
+
+  .hero__buttons .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero__info {
+    padding: 0.8rem 0.9rem;
+  }
+
+  .hero__info-images {
+    height: 90px;
+  }
+
+  .hero__info-images img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .section {
+    padding: 1.8rem 1.25rem;
+    margin-top: 2.5rem;
+    border-radius: 20px;
+  }
+
+  .section__head {
+    margin-bottom: 1.5rem;
+  }
+
+  .section__head h2 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    padding: 1.4rem 1.25rem;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+  }
+
+  .step {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .step__id {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .step h3 {
+    font-size: 1rem;
+  }
+
+  .step p {
+    font-size: 0.9rem;
+  }
+
+  .journey__side {
+    padding: 1.25rem;
+  }
+
+  .journey__side h3 {
+    font-size: 1.1rem;
+  }
+
+  .pc3d__info h3 {
+    font-size: 1.2rem;
+  }
+
+  .pc3d__info ul {
+    font-size: 0.95rem;
+  }
+}
+
+/* ===== Mobile petit (max-width: 480px) ===== */
+@media (max-width: 480px) {
+  .page {
+    padding-inline: 0.875rem;
+  }
+
+  .header {
+    padding: 0.7rem 0.875rem;
+    border-radius: 16px;
+  }
+
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hero {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero__title {
+    font-size: 1.4rem;
+  }
+
+  .hero__subtitle {
+    font-size: 0.9rem;
+  }
+
+  .hero__right {
+    display: none;
+  }
+
+  .hero__info--wide .btn--small {
+    padding: 0.8rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .hero__info-images {
+    height: 80px;
+    border-radius: 10px;
+  }
+
+  .hero__info-images img {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
   }
 
   .btn {
-    width: 100%;
-    text-align: center;
+    padding: 0.8rem 1.4rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  .footer {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .footer__brand-desc {
+    font-size: 0.9rem;
+  }
+
+  .footer__column h4 {
+    font-size: 0.95rem;
+  }
+
+  .footer__links a {
+    font-size: 0.9rem;
+  }
+
+  .footer__bottom {
+    font-size: 0.85rem;
+    gap: 0.75rem;
+  }
+
+  .footer__legal {
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .section {
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+    border-radius: 16px;
+  }
+
+  .section__head h2 {
+    font-size: 1.35rem;
+  }
+
+  .section__head p {
+    font-size: 0.9rem;
+  }
+
+  .card {
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+  }
+
+  .step {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .journey__side {
+    border-radius: 14px;
+  }
+
+  .nav {
+    inset: 60px 0.875rem auto;
+  }
+}
+
+/* ===== Très petit écran (max-width: 360px) ===== */
+@media (max-width: 360px) {
+  .page {
+    padding-inline: 0.75rem;
+  }
+
+  .hero__title {
+    font-size: 1.25rem;
+  }
+
+  .hero__subtitle {
+    font-size: 0.85rem;
+  }
+
+  .hero__info-images {
+    height: 70px;
+  }
+
+  .hero__info-images img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .section__head h2 {
+    font-size: 1.25rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .step__id {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ===== Préférence : réduction des animations ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero__info-track {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ===== Mode paysage mobile ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .hero__right {
+    display: none;
+  }
+
+  .hero__title {
+    font-size: 1.5rem;
+    height: auto;
+  }
+
+  .hero__info--wide {
+    flex-direction: row;
+  }
+
+  .nav {
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+  }
+}
+
+/* ===== Écran large (min-width: 1400px) ===== */
+@media (min-width: 1400px) {
+  .page {
+    max-width: 1320px;
+  }
+
+  .hero {
+    gap: 4rem;
+  }
+
+  .hero__title {
+    font-size: 3.5rem;
+  }
+
+  .pc3d__canvas {
+    height: 420px;
+  }
+
+  .section {
+    padding: 3.5rem 3rem;
   }
 }
