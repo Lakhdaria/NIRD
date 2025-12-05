@@ -31,8 +31,7 @@
             <nav class="nav" id="navMenu">
                 <a href="index.html">Accueil</a>
                 <a href="repair-game.html">Jeu de réparation</a>
-                <a href="page-linux.html" class="is-active">Installation Linux</a>
-                <a href="avis.html">Donnez votre avis</a>
+                <a href="linux-simulator.html" class="is-active">Installation Linux</a>
             </nav>
 
             <button class="header__cta" onclick="window.location.href='index.html'">
@@ -261,38 +260,272 @@
                 <!-- Desktop final -->
                 <div class="linux-desktop" id="linuxDesktop" style="display: none;">
                     <div class="desktop-wallpaper">
-                        <div class="desktop-icons">
-                            <div class="desktop-icon">
+                        
+                        <!-- Icônes du bureau (grille centrée) -->
+                        <div class="desktop-icons-grid">
+                            <div class="desktop-icon" data-window="terminal">
+                                <div class="icon">💻</div>
+                                <span>Terminal</span>
+                            </div>
+                            <div class="desktop-icon" data-window="files">
                                 <div class="icon">📁</div>
                                 <span>Fichiers</span>
                             </div>
-                            <div class="desktop-icon">
-                                <div class="icon">⚙️</div>
-                                <span>Paramètres</span>
-                            </div>
-                            <div class="desktop-icon">
+                            <div class="desktop-icon" data-window="browser">
                                 <div class="icon">🌐</div>
                                 <span>Navigateur</span>
                             </div>
+                            <div class="desktop-icon" data-window="settings">
+                                <div class="icon">🛠️</div>
+                                <span>Paramètres</span>
+                            </div>
                         </div>
 
-                        <div class="welcome-message">
+                        <!-- Message de félicitations (disparaît après interaction) -->
+                        <div class="welcome-message" id="welcomeMessage">
                             <h2>🎉 Félicitations !</h2>
-                            <p>Vous avez simulé votre première installation Linux !</p>
+                            <p>Vous avez terminé l'installation de Linux !</p>
                             <p class="message-highlight">
-                                Vous êtes maintenant prêt à recycler un ancien ordinateur dans la vraie vie.
+                                Explorez maintenant votre nouveau système : ouvrez le 
+                                <strong>Terminal</strong> pour taper des commandes, 
+                                parcourez vos <strong>Fichiers</strong>, ou naviguez sur le web !
                             </p>
                             <div class="final-actions">
-                                <button class="btn btn--primary" onclick="window.location.href='index.html'">
-                                    Retour à l'accueil
+                                <button class="btn btn--primary" id="startExploring">
+                                    🖥️ Explorer le bureau
                                 </button>
-                                <button class="btn btn--ghost" onclick="location.reload()">
-                                    Recommencer la simulation
+                                <button class="btn btn--ghost" onclick="window.location.href='index.html'">
+                                    Retour à l'accueil
                                 </button>
                             </div>
                         </div>
+
+                        <!-- Container pour les fenêtres -->
+                        <div class="windows-container" id="windowsContainer">
+                            
+                            <!-- Fenêtre Terminal -->
+                            <div class="os-window terminal-window" id="window-terminal" data-window="terminal">
+                                <div class="window-header terminal-header-dark">
+                                    <div class="window-title">
+                                        <span class="window-icon">💻</span>
+                                        <span>Terminal</span>
+                                    </div>
+                                    <button class="window-close" data-close="terminal">✕</button>
+                                </div>
+                                <div class="window-content terminal-content" id="terminalWindow">
+                                    <div class="terminal-output" id="terminalOutputDesktop">
+                                        <div class="terminal-welcome">
+Bienvenue dans le Terminal Linux ! 🐧
+Tapez "help" pour voir les commandes disponibles.
+                                        </div>
+                                    </div>
+                                    <div class="terminal-input-line">
+                                        <span class="terminal-prompt-text" id="terminalPrompt">utilisateur@linux-sim:~$</span>
+                                        <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Fenêtre Paramètres -->
+                            <div class="os-window" id="window-settings" data-window="settings">
+                                <div class="window-header">
+                                    <div class="window-title">
+                                        <span class="window-icon">🛠️</span>
+                                        <span>Paramètres</span>
+                                    </div>
+                                    <button class="window-close" data-close="settings">✕</button>
+                                </div>
+                                <div class="window-content">
+                                    <div class="settings-section">
+                                        <h3>🎨 Apparence</h3>
+                                        <div class="setting-item">
+                                            <span>Thème</span>
+                                            <div class="theme-toggle" id="themeToggle">
+                                                <span class="theme-option active" data-theme="dark">🌙 Sombre</span>
+                                                <span class="theme-option" data-theme="light">☀️ Clair</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="settings-section">
+                                        <h3>💻 Système</h3>
+                                        <div class="system-info">
+                                            <div class="info-row">
+                                                <span>OS</span>
+                                                <span id="osName">Linux Ubuntu 24.04</span>
+                                            </div>
+                                            <div class="info-row">
+                                                <span>Noyau</span>
+                                                <span>6.5.0-generic</span>
+                                            </div>
+                                            <div class="info-row">
+                                                <span>Mémoire</span>
+                                                <span>8 GB DDR4</span>
+                                            </div>
+                                            <div class="info-row">
+                                                <span>Processeur</span>
+                                                <span>Intel Core i5</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="settings-section">
+                                        <h3>📶 Réseau</h3>
+                                        <div class="network-status">
+                                            <div class="status-indicator connected"></div>
+                                            <span>Connecté à "WiFi_Maison"</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fenêtre Navigateur -->
+                            <div class="os-window" id="window-browser" data-window="browser">
+                                <div class="window-header">
+                                    <div class="window-title">
+                                        <span class="window-icon">🌐</span>
+                                        <span>Navigateur</span>
+                                    </div>
+                                    <button class="window-close" data-close="browser">✕</button>
+                                </div>
+                                <div class="window-content browser-content">
+                                    <div class="browser-toolbar">
+                                        <div class="browser-nav">
+                                            <button class="nav-btn">←</button>
+                                            <button class="nav-btn">→</button>
+                                            <button class="nav-btn">🔄</button>
+                                        </div>
+                                        <div class="browser-url">
+                                            <span>🔒</span>
+                                            <input type="text" value="https://bienvenue-linux.local" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="browser-page">
+                                        <div class="fake-webpage">
+                                            <h1>🐧 Bienvenue sur Linux !</h1>
+                                            <p>Vous naviguez maintenant avec un navigateur libre et open-source.</p>
+                                            <div class="webpage-features">
+                                                <div class="feature">🔒 Vie privée respectée</div>
+                                                <div class="feature">⚡ Navigation rapide</div>
+                                                <div class="feature">🌍 Web ouvert</div>
+                                            </div>
+                                            <p class="explore-text">Explorez librement le web sans trackers ! 🎉</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fenêtre Fichiers -->
+                            <div class="os-window" id="window-files" data-window="files">
+                                <div class="window-header">
+                                    <div class="window-title">
+                                        <span class="window-icon">📁</span>
+                                        <span>Fichiers</span>
+                                    </div>
+                                    <button class="window-close" data-close="files">✕</button>
+                                </div>
+                                <div class="window-content files-content">
+                                    <div class="files-sidebar">
+                                        <div class="sidebar-item" data-path="/home/utilisateur">
+                                            <span>🏠</span> Accueil
+                                        </div>
+                                        <div class="sidebar-item" data-path="/home/utilisateur/Documents">
+                                            <span>📄</span> Documents
+                                        </div>
+                                        <div class="sidebar-item" data-path="/home/utilisateur/Images">
+                                            <span>🖼️</span> Images
+                                        </div>
+                                        <div class="sidebar-item" data-path="/home/utilisateur/Téléchargements">
+                                            <span>⬇️</span> Téléchargements
+                                        </div>
+                                        <div class="sidebar-item" data-path="/home/utilisateur/Musique">
+                                            <span>🎵</span> Musique
+                                        </div>
+                                        <div class="sidebar-item" data-path="/home/utilisateur/Jeux">
+                                            <span>🎮</span> Jeux
+                                        </div>
+                                        <div class="sidebar-item" data-path="/">
+                                            <span>💻</span> Système
+                                        </div>
+                                    </div>
+                                    <div class="files-main">
+                                        <div class="files-toolbar">
+                                            <button class="files-nav-btn" id="filesBack" title="Retour">←</button>
+                                            <button class="files-nav-btn" id="filesHome" title="Accueil">🏠</button>
+                                            <div class="files-path" id="filesPathBar">
+                                                <span>🏠</span> / home / <span id="filesUsername">utilisateur</span>
+                                            </div>
+                                        </div>
+                                        <div class="files-grid" id="filesGrid">
+                                            <!-- Contenu dynamique -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fenêtre Éditeur de Texte -->
+                            <div class="os-window editor-window" id="window-editor" data-window="editor">
+                                <div class="window-header editor-header">
+                                    <div class="window-title">
+                                        <span class="window-icon">📝</span>
+                                        <span id="editorFileName">Éditeur</span>
+                                    </div>
+                                    <button class="window-close" data-close="editor">✕</button>
+                                </div>
+                                <div class="window-content editor-content">
+                                    <textarea id="editorTextarea" placeholder="Commencez à écrire..." spellcheck="false"></textarea>
+                                    <div class="editor-footer">
+                                        <div class="editor-info">
+                                            <span id="editorLineCount">Lignes: 0</span>
+                                            <span id="editorCharCount">Caractères: 0</span>
+                                        </div>
+                                        <div class="editor-actions">
+                                            <button class="btn btn--ghost btn--sm" id="editorCancel">Annuler</button>
+                                            <button class="btn btn--primary btn--sm" id="editorSave">💾 Enregistrer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fenêtre Jeu Mario -->
+                            <div class="os-window mario-window" id="window-mario" data-window="mario">
+                                <div class="window-header mario-header">
+                                    <div class="window-title">
+                                        <span class="window-icon">🍄</span>
+                                        <span>Super Linux Bros</span>
+                                    </div>
+                                    <button class="window-close" data-close="mario">✕</button>
+                                </div>
+                                <div class="window-content mario-content">
+                                    <canvas id="marioCanvas" width="640" height="400"></canvas>
+                                    <div class="mario-overlay" id="marioOverlay">
+                                        <div class="mario-title">🍄 Super Linux Bros 🐧</div>
+                                        <div class="mario-instructions">
+                                            <p>← → pour se déplacer</p>
+                                            <p>ESPACE pour sauter</p>
+                                        </div>
+                                        <button class="btn btn--primary mario-start-btn" id="marioStartBtn">
+                                            🎮 Jouer
+                                        </button>
+                                    </div>
+                                    <div class="mario-win-screen" id="marioWinScreen">
+                                        <div class="mario-win-title">🎉 Bravo !</div>
+                                        <p>Vous avez terminé ce niveau !</p>
+                                        <div class="mario-win-stats">
+                                            <span id="marioTime">Temps: 00:00</span>
+                                        </div>
+                                        <button class="btn btn--primary" id="marioRestartBtn">🔄 Rejouer</button>
+                                        <button class="btn btn--ghost" id="marioCloseBtn">Fermer</button>
+                                    </div>
+                                    <div class="mario-hud" id="marioHUD">
+                                        <span class="mario-score">🪙 <span id="marioCoins">0</span></span>
+                                        <span class="mario-lives">❤️ <span id="marioLives">3</span></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
+                    <!-- Taskbar -->
                     <div class="taskbar">
                         <div class="taskbar-left">
                             <div class="app-launcher">
@@ -301,13 +534,16 @@
                             </div>
                         </div>
                         <div class="taskbar-center">
-                            <span class="time" id="desktopTime">14:32</span>
+                            <div class="taskbar-apps" id="taskbarApps">
+                                <!-- Icônes des fenêtres ouvertes apparaissent ici -->
+                            </div>
                         </div>
                         <div class="taskbar-right">
                             <div class="system-tray">
                                 <span>🔊</span>
                                 <span>📶</span>
                                 <span>🔋</span>
+                                <span class="time" id="desktopTime">14:32</span>
                             </div>
                         </div>
                     </div>
