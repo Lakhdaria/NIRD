@@ -283,34 +283,35 @@ function initStep4() {
     const strengthBar = document.querySelector('.strength-bar');
     const strengthText = document.querySelector('.strength-text');
 
-    // Validation en temps réel
+    // Fonction de validation du formulaire - appelée à chaque modification
     function checkFormValidity() {
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value.trim();
+        const username = usernameInput ? usernameInput.value.trim() : '';
+        const password = passwordInput ? passwordInput.value : '';
         
-        if (username.length >= 3 && password.length >= 6) {
-            continueBtn.disabled = false;
-            avatar.classList.add('happy');
+        const isValid = username.length >= 1 && password.length >= 1;
+        
+        if (continueBtn) {
+            continueBtn.disabled = !isValid;
+        }
+        
+        if (avatar) {
+            if (isValid) {
+                avatar.classList.add('happy');
+            } else {
+                avatar.classList.remove('happy');
+            }
+        }
+        
+        // Mise à jour de l'humeur de l'avatar si l'élément existe
+        if (avatarMood && isValid) {
             avatarMood.textContent = '😄';
-        } else {
-            continueBtn.disabled = true;
-            avatar.classList.remove('happy');
-            avatarMood.textContent = '😊';
         }
     }
-
-    usernameInput.addEventListener('input', (e) => {
-        // Convertir en minuscules
-        e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9]/g, '');
-        SimulatorState.userData.username = e.target.value;
-        checkFormValidity();
-    });
-
-    passwordInput.addEventListener('input', (e) => {
-        const password = e.target.value;
-        SimulatorState.userData.password = password;
+    
+    // Fonction pour mettre à jour l'indicateur de force du mot de passe
+    function updatePasswordStrength(password) {
+        if (!strengthBar || !strengthText) return;
         
-        // Calculer la force du mot de passe
         let strength = 0;
         if (password.length >= 6) strength++;
         if (password.length >= 10) strength++;
@@ -320,31 +321,63 @@ function initStep4() {
 
         // Mettre à jour l'affichage
         strengthBar.className = 'strength-bar';
-        if (strength <= 2) {
+        
+        if (password.length === 0) {
+            strengthText.textContent = 'Force : -';
+            if (avatarMood) avatarMood.textContent = '😊';
+        } else if (strength <= 2) {
             strengthBar.classList.add('weak');
             strengthText.textContent = 'Force : Faible';
-            avatarMood.textContent = '😐';
+            if (avatarMood) avatarMood.textContent = '😐';
         } else if (strength <= 4) {
             strengthBar.classList.add('medium');
             strengthText.textContent = 'Force : Moyenne';
-            avatarMood.textContent = '🙂';
+            if (avatarMood) avatarMood.textContent = '🙂';
         } else {
             strengthBar.classList.add('strong');
             strengthText.textContent = 'Force : Forte';
-            avatarMood.textContent = '😎';
+            if (avatarMood) avatarMood.textContent = '😎';
         }
+    }
 
-        checkFormValidity();
-    });
+    // Événement sur le champ username
+    if (usernameInput) {
+        usernameInput.addEventListener('input', (e) => {
+            // Convertir en minuscules et retirer caractères non autorisés
+            e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9]/g, '');
+            SimulatorState.userData.username = e.target.value;
+            checkFormValidity();
+        });
+    }
 
-    hostnameInput.addEventListener('input', (e) => {
-        e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '');
-        SimulatorState.userData.hostname = e.target.value;
-    });
+    // Événement sur le champ password
+    if (passwordInput) {
+        passwordInput.addEventListener('input', (e) => {
+            const password = e.target.value;
+            SimulatorState.userData.password = password;
+            
+            // Mettre à jour l'indicateur de force
+            updatePasswordStrength(password);
+            
+            // Vérifier la validité du formulaire
+            checkFormValidity();
+        });
+    }
 
-    continueBtn.addEventListener('click', () => {
-        goToStep(5);
-    });
+    // Événement sur le champ hostname
+    if (hostnameInput) {
+        hostnameInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '');
+            SimulatorState.userData.hostname = e.target.value;
+        });
+    }
+
+    // Bouton continuer
+    if (continueBtn) {
+        continueBtn.addEventListener('click', () => {
+            goToStep(5);
+        });
+    }
 }
 
 // ============================================

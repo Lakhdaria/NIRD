@@ -852,6 +852,22 @@
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
+/* Style spécial pour l'icône de sortie */
+.desktop-icon--exit .icon {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+.desktop-icon--exit:hover {
+    background: rgba(239, 68, 68, 0.3);
+    box-shadow: 0 12px 40px rgba(239, 68, 68, 0.4);
+}
+
+.desktop-icon--exit:hover .icon {
+    filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.6));
+    background: rgba(239, 68, 68, 0.3);
+}
+
 /* ========== Message de bienvenue ========== */
 .welcome-message {
     position: absolute;
