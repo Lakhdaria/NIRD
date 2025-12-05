@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIRD – Mentions Légales & Crédits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles/styles_global.css">
+    <link rel="stylesheet" href="styles/mentions-legales.css">
+</head>
+
+<body>
+    <canvas id="particlesCanvas" aria-hidden="true"></canvas>
+    <div class="bg"></div>
+
+    <div class="page">
+        <header class="header">
+            <div class="header__brand">
+                <a href="index.html">
+                    <div class="brand-logo">
+                        <img src="assets/logo.jpg" alt="DoctorPC">
+                    </div>
+                </a>
+                <div class="brand-text">
+                    <span class="brand-title">DoctorPC</span>
+                </div>
+            </div>
+
+            <nav class="nav" id="navMenu">
+                <a href="index.html">Accueil</a>
+                <a href="repair-game.html">Jeu de réparation</a>
+                <a href="page-linux.html">Installation Linux</a>
+                <a href="ia.html" aria-label="Parler au ChatBot">Parler au ChatBot</a>
+                <a href="carte.html" aria-current="page">Carte compétences</a>
+                <a href="avis.html">Donner un avis</a>
+            </nav>
+
+
+            <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+        <main class="legal-page">
+            <!-- Hero Section -->
+            <section class="legal-hero">
+                <h1 class="legal-hero__title">Mentions Légales & Crédits</h1>
+                <p class="legal-hero__subtitle">
+                    Transparence sur le projet, les technologies utilisées et les ressources externes.
+                </p>
+            </section>
+
+            <!-- Navigation rapide -->
+            <nav class="legal-nav">
+                <a href="#projet" class="legal-nav__link">📋 Le Projet</a>
+                <a href="#fonctionnalites" class="legal-nav__link">⚡ Fonctionnalités</a>
+                <a href="#technologies" class="legal-nav__link">💻 Technologies</a>
+                <a href="#credits" class="legal-nav__link">🎨 Crédits</a>
+                <a href="#mentions" class="legal-nav__link">⚖️ Mentions Légales</a>
+            </nav>
+
+            <!-- Contenu principal -->
+            <div class="legal-content">
+
+                <!-- Section Projet -->
+                <section class="legal-section" id="projet">
+                    <div class="legal-section__header">
+                        <span class="legal-section__icon">📋</span>
+                        <h2>Le Projet NIRD</h2>
+                    </div>
+                    <div class="legal-section__content">
+                        <p>
+                            <strong>NIRD</strong> (Numérique Inclusif, Responsable et Durable) est un projet éducatif
+                            développé dans le cadre de la <strong>Nuit de l'Info 2025</strong>. Il vise à sensibiliser
+                            les établissements scolaires et le grand public aux enjeux du numérique responsable.
+                        </p>
+
+                        <div class="legal-card">
+                            <h3>🎯 Objectifs du projet</h3>
+                            <ul>
+                                <li>Lutter contre l'obsolescence programmée du matériel informatique</li>
+                                <li>Promouvoir les logiciels libres et open source</li>
+                                <li>Encourager le réemploi et la réparation des équipements</li>
+                                <li>Sensibiliser à l'impact environnemental du numérique</li>
+                                <li>Former à l'autonomie numérique et à la sobriété technologique</li>
+                            </ul>
+                        </div>
+
+                        <div class="legal-card">
+                            <h3>👥 Équipe de développement</h3>
+                            <p>
+                                Ce projet a été réalisé par une équipe d'étudiants passionnés lors de la Nuit de l'Info
+                                2025,
+                                un marathon de développement de 24 heures dédié à la création de projets numériques
+                                innovants.
+                            </p>
+                        </div>
+
+                        <div class="legal-card legal-card--highlight">
+                            <h3>🔗 Code Source</h3>
+                            <p>
+                                Le code source de ce projet est disponible publiquement sur GitHub,
+                                dans un esprit de transparence et de partage conforme aux valeurs du logiciel libre.
+                            </p>
+                            <a href="https://github.com/Lakhdaria/NIRD" target="_blank" class="btn btn--primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                                Voir sur GitHub
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Fonctionnalités -->
+                <section class="legal-section" id="fonctionnalites">
+                    <div class="legal-section__header">
+                        <span class="legal-section__icon">⚡</span>
+                        <h2>Fonctionnalités du Site</h2>
+                    </div>
+                    <div class="legal-section__content">
+                        <p>
+                            Le site NIRD propose plusieurs modules interactifs pour apprendre et s'engager
+                            dans une démarche de numérique responsable.
+                        </p>
+
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-card__icon">🔧</div>
+                                <h3>Jeu de Réparation PC</h3>
+                                <p>
+                                    Apprenez à réparer un ordinateur virtuellement en installant les composants
+                                    (processeur, RAM, carte graphique, SSD, alimentation) sur un modèle 3D interactif.
+                                    Chaque composant installé améliore la "santé" du PC et vous enseigne son rôle.
+                                </p>
+                                <ul>
+                                    <li>Modèle 3D interactif avec zoom sur les composants</li>
+                                    <li>Système de drag & drop intuitif</li>
+                                    <li>Quiz pédagogiques pour valider vos connaissances</li>
+                                    <li>Barre de santé avec progression visuelle</li>
+                                </ul>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card__icon">🐧</div>
+                                <h3>Simulateur Linux</h3>
+                                <p>
+                                    Découvrez l'installation et l'utilisation de Linux sans risque grâce à notre
+                                    simulateur complet. Apprenez les commandes de base du terminal et explorez
+                                    un environnement de bureau virtuel.
+                                </p>
+                                <ul>
+                                    <li>Simulation complète d'installation Linux</li>
+                                    <li>Terminal interactif avec commandes réelles</li>
+                                    <li>Explorateur de fichiers virtuel</li>
+                                    <li>Jeux intégrés : Super Linux Bros & Pac-Man</li>
+                                </ul>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card__icon">🎮</div>
+                                <h3>Mini-Jeux Rétro</h3>
+                                <p>
+                                    Deux jeux classiques recréés entièrement en JavaScript pour le plaisir
+                                    et la démonstration des capacités du navigateur.
+                                </p>
+                                <ul>
+                                    <li><strong>Super Linux Bros</strong> : Platformer 2D avec Tux le pingouin</li>
+                                    <li><strong>Pac-Man Linux</strong> : Le classique arcade avec labyrinthe complet
+                                    </li>
+                                    <li>Moteurs de jeu personnalisés avec Canvas 2D</li>
+                                </ul>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card__icon">🖥️</div>
+                                <h3>Visualisation 3D</h3>
+                                <p>
+                                    Explorez un modèle 3D détaillé d'un ordinateur de bureau pour comprendre
+                                    l'architecture interne d'un PC et l'emplacement de chaque composant.
+                                </p>
+                                <ul>
+                                    <li>Rendu 3D temps réel avec Three.js</li>
+                                    <li>Rotation et zoom interactifs</li>
+                                    <li>Éclairage réaliste et ombres</li>
+                                </ul>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card__icon">🎴</div>
+                                <h3>Carte Compétences</h3>
+                                <p>
+                                    Découvrez votre profil numérique grâce à un système de cartes personnalisées
+                                    qui révèle vos traits de personnalité tech.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-card__icon">✨</div>
+                                <h3>Effets Visuels</h3>
+                                <p>
+                                    Particules animées en arrière-plan, animations fluides et interface moderne
+                                    pour une expérience utilisateur immersive.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Technologies -->
+                <section class="legal-section" id="technologies">
+                    <div class="legal-section__header">
+                        <span class="legal-section__icon">💻</span>
+                        <h2>Technologies Utilisées</h2>
+                    </div>
+                    <div class="legal-section__content">
+                        <p>
+                            Ce projet a été développé avec des technologies web modernes,
+                            privilégiant les solutions open source et les standards du web.
+                        </p>
+
+                        <div class="tech-category">
+                            <h3>🌐 Langages de Programmation</h3>
+                            <div class="tech-list">
+                                <div class="tech-item">
+                                    <div class="tech-item__icon" style="background: #e34c26;">
+                                        <span>HTML5</span>
+                                    </div>
+                                    <div class="tech-item__info">
+                                        <h4>HTML5</h4>
+                                        <p>Structure sémantique des pages, éléments Canvas pour les jeux et
+                                            visualisations 3D.</p>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-item__icon" style="background: #264de4;">
+                                        <span>CSS3</span>
+                                    </div>
+                                    <div class="tech-item__info">
+                                        <h4>CSS3</h4>
+                                        <p>Styles modernes avec Flexbox, Grid, animations, transitions et design
+                                            responsive.</p>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-item__icon" style="background: #f0db4f;">
+                                        <span>JS</span>
+                                    </div>
+                                    <div class="tech-item__info">
+                                        <h4>JavaScript ES6+</h4>
+                                        <p>Logique applicative, moteurs de jeux, interactions 3D, système de fichiers
+                                            virtuel.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tech-category">
+                            <h3>📦 Bibliothèques & Frameworks</h3>
+                            <div class="tech-list">
+                                <div class="tech-item">
+                                    <div class="tech-item__icon" style="background: #000;">
+                                        <span>Three</span>
+                                    </div>
+                                    <div class="tech-item__info">
+                                        <h4>Three.js</h4>
+                                        <p>
+                                            Bibliothèque JavaScript pour la création de graphiques 3D dans le
+                                            navigateur.
+                                            Utilisée pour le rendu des modèles 3D de PC, les contrôles orbitaux et
+                                            l'éclairage.
+                                        </p>
+                                        <a href="https://threejs.org/" target="_blank">threejs.org</a>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-item__icon"
+                                        style="background: linear-gradient(135deg, #4f46e5, #7c3aed);">
+                                        <span>GLB</span>
+                                    </div>
+                                    <div class="tech-item__info">
+                                        <h4>GLTFLoader</h4>
+                                        <p>
+                                            Chargeur de modèles 3D au format glTF/GLB, le standard moderne pour les
+                                            assets 3D web.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tech-category">
+                            <h3>🎨 Design & UI</h3>
+                            <div class="tech-list">
+                                <div class="tech-item">
+                                    <div class="tech-item__icon" style="background: #4285f4;">
+                                        <span>Aa</span>
+                                    </div>
+                                    <div class="tech-item__info">
+                                        <h4>Google Fonts</h4>
+                                        <p>Police "Space Grotesk" pour une typographie moderne et technique.</p>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <div class="tech-item__icon"
+                                        style="background: linear-gradient(135deg, #0f172a, #1e1b4b);">
+                                        <span>CSS</span>
+                                    </div>
+                                    <div class="tech-item__info">
+                                        <h4>Variables CSS</h4>
+                                        <p>Système de design cohérent avec couleurs, espacements et effets
+                                            réutilisables.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tech-category">
+                            <h3>🛠️ Outils de Développement</h3>
+                            <div class="tech-list">
+                                <div class="tech-item">
+                                    <div class="tech-item__icon" style="background: #24292e;">
+                                        <span>Git</span>
+                                    </div>
+                                    <div class="tech-item__info">
+                                        <h4>Git & GitHub</h4>
+                                        <p>Gestion de version et hébergement du code source.</p>
+                                        <a href="https://github.com/Lakhdaria/NIRD"
+                                            target="_blank">github.com/Lakhdaria/NIRD</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Crédits -->
+                <section class="legal-section" id="credits">
+                    <div class="legal-section__header">
+                        <span class="legal-section__icon">🎨</span>
+                        <h2>Crédits & Ressources Externes</h2>
+                    </div>
+                    <div class="legal-section__content">
+                        <p>
+                            Ce projet utilise des ressources externes que nous tenons à créditer.
+                            Nous remercions les créateurs pour leur travail.
+                        </p>
+
+                        <div class="credit-card credit-card--ai">
+                            <div class="credit-card__header">
+                                <span class="credit-card__icon">🤖</span>
+                                <h3>Intelligence Artificielle - ChatGPT</h3>
+                            </div>
+                            <div class="credit-card__content">
+                                <p>
+                                    <strong>OpenAI ChatGPT</strong> a été utilisé comme outil d'assistance pour :
+                                </p>
+                                <ul>
+                                    <li><strong>Génération du logo</strong> : Le logo NIRD a été créé avec l'aide de
+                                        DALL-E / ChatGPT</li>
+                                    <li><strong>Certaines images du site</strong> : Illustrations et visuels générés par
+                                        IA</li>
+                                    <li><strong>Assistance au développement</strong> : Aide à la rédaction de code et
+                                        debugging</li>
+                                </ul>
+                                <p class="credit-card__note">
+                                    ⚠️ Les contenus générés par IA ont été revus et adaptés par l'équipe de
+                                    développement.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="credit-card credit-card--3d">
+                            <div class="credit-card__header">
+                                <span class="credit-card__icon">🎮</span>
+                                <h3>Modèles 3D - Sketchfab</h3>
+                            </div>
+                            <div class="credit-card__content">
+                                <p>
+                                    Les modèles 3D utilisés dans ce projet proviennent de <strong>Sketchfab</strong>,
+                                    plateforme de partage de modèles 3D.
+                                </p>
+                                <ul>
+                                    <li>Modèle de PC de bureau pour le jeu de réparation</li>
+                                    <li>Composants informatiques (carte graphique, RAM, etc.)</li>
+                                    <li>Setup de bureau pour la page d'accueil</li>
+                                </ul>
+                                <p>
+                                    <a href="https://sketchfab.com" target="_blank" class="credit-link">
+                                        🔗 Visiter Sketchfab
+                                    </a>
+                                </p>
+                                <p class="credit-card__note">
+                                    Les modèles ont été utilisés conformément à leurs licences respectives (CC-BY, CC0,
+                                    etc.).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="credit-card">
+                            <div class="credit-card__header">
+                                <span class="credit-card__icon">🔤</span>
+                                <h3>Typographie</h3>
+                            </div>
+                            <div class="credit-card__content">
+                                <p>
+                                    <strong>Space Grotesk</strong> - Police Google Fonts
+                                </p>
+                                <p>
+                                    Design par Florian Karsten. Licence : SIL Open Font License.
+                                </p>
+                                <a href="https://fonts.google.com/specimen/Space+Grotesk" target="_blank"
+                                    class="credit-link">
+                                    🔗 Voir sur Google Fonts
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="credit-card">
+                            <div class="credit-card__header">
+                                <span class="credit-card__icon">😀</span>
+                                <h3>Émojis & Icônes</h3>
+                            </div>
+                            <div class="credit-card__content">
+                                <p>
+                                    Les émojis utilisés sont les émojis natifs du système (Twemoji, Apple, etc.).
+                                    Les icônes SVG ont été créées sur mesure pour le projet.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Mentions Légales -->
+                <section class="legal-section" id="mentions">
+                    <div class="legal-section__header">
+                        <span class="legal-section__icon">⚖️</span>
+                        <h2>Mentions Légales</h2>
+                    </div>
+                    <div class="legal-section__content">
+
+                        <div class="legal-card">
+                            <h3>📝 Éditeur du site</h3>
+                            <p>
+                                Ce site est un projet étudiant réalisé dans le cadre de la <strong>Nuit de l'Info
+                                    2025</strong>.
+                            </p>
+                            <p>
+                                Projet porté par la <strong>Forge des communs numériques éducatifs</strong>.
+                            </p>
+                        </div>
+
+                        <div class="legal-card">
+                            <h3>🖥️ Hébergement</h3>
+                            <p>
+                                Le code source est hébergé sur <strong>GitHub</strong> (Microsoft Corporation).
+                            </p>
+                            <p>
+                                Adresse : GitHub, Inc. - 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA
+                            </p>
+                        </div>
+
+                        <div class="legal-card">
+                            <h3>📜 Licence</h3>
+                            <p>
+                                Ce projet est distribué sous licence open source.
+                                Vous êtes libre de l'utiliser, le modifier et le redistribuer
+                                dans le respect des termes de la licence.
+                            </p>
+                            <p>
+                                Consultez le fichier <code>LICENSE</code> sur le dépôt GitHub pour plus de détails.
+                            </p>
+                        </div>
+
+                        <div class="legal-card">
+                            <h3>🔒 Données personnelles</h3>
+                            <p>
+                                Ce site <strong>ne collecte aucune donnée personnelle</strong>.
+                                Aucun cookie de traçage, aucun formulaire d'inscription,
+                                aucune donnée envoyée à des serveurs externes.
+                            </p>
+                            <p>
+                                Les interactions sont entièrement locales (dans votre navigateur).
+                            </p>
+                        </div>
+
+                        <div class="legal-card">
+                            <h3>🎓 Usage éducatif</h3>
+                            <p>
+                                Ce projet a été créé à des fins <strong>pédagogiques et de sensibilisation</strong>.
+                                Il ne constitue pas un service commercial.
+                            </p>
+                            <p>
+                                Les contenus sont fournis "tels quels" sans garantie d'exactitude ou de complétude.
+                            </p>
+                        </div>
+
+                        <div class="legal-card">
+                            <h3>©️ Propriété intellectuelle</h3>
+                            <p>
+                                Les éléments originaux de ce site (code, textes, design) sont la propriété de leurs
+                                auteurs.
+                            </p>
+                            <p>
+                                Les ressources externes (modèles 3D, polices, images IA) sont utilisées
+                                conformément à leurs licences respectives, mentionnées dans la section Crédits.
+                            </p>
+                        </div>
+
+                        <div class="legal-card">
+                            <h3>📧 Contact</h3>
+                            <p>
+                                Pour toute question concernant ce projet, vous pouvez ouvrir une
+                                <strong>issue</strong> sur le dépôt GitHub :
+                            </p>
+                            <a href="https://github.com/Lakhdaria/NIRD/issues" target="_blank" class="btn btn--ghost">
+                                Ouvrir une issue
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer__main">
+                <div class="footer__brand">
+                    <div class="footer__brand-header">
+                        <div class="footer__logo">
+                            <img src="assets/logo.jpg" alt="DoctorPC">
+                        </div>
+                        <span class="footer__brand-name">DoctorPC</span>
+                    </div>
+                    <p class="footer__brand-desc">
+                        Numérique Inclusif, Responsable et Durable. Un projet éducatif pour
+                        sensibiliser aux enjeux du numérique sobre et du réemploi informatique.
+                    </p>
+                    <div class="footer__social">
+                        <a href="https://github.com/Lakhdaria/NIRD" target="_blank" class="footer__social-link"
+                            title="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer__column">
+                    <h4>Navigation</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="repair-game.html">Jeu de réparation</a></li>
+                        <li><a href="page-linux.html">Installation Linux</a></li>
+                        <li><a href="carte.html">Carte compétences</a></li>
+                        <li><a href="avis.html">Donner un avis</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__column">
+                    <h4>Ressources</h4>
+                    <ul class="footer__links">
+                        <li><a href="https://github.com/Lakhdaria/NIRD" target="_blank">Code source</a></li>
+                        <li><a href="mentions-legales.html">Mentions légales</a></li>
+                        <li><a href="mentions-legales.html#credits">Crédits</a></li>
+                        <li><a href="mentions-legales.html#technologies">Technologies</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    © 2025 <a href="https://github.com/Lakhdaria/NIRD" target="_blank">Projet NIRD</a> ·
+                    Nuit de l'Info 2025 · Vers un numérique plus libre et plus sobre.
+                </p>
+                <div class="footer__legal">
+                    <a href="mentions-legales.html">Mentions légales</a>
+                    <a href="mentions-legales.html#credits">Crédits</a>
+                    <a href="https://github.com/Lakhdaria/NIRD" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Burger menu
+        const burger = document.getElementById('burgerBtn');
+        const nav = document.getElementById('navMenu');
+
+        if (burger && nav) {
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('is-open');
+                nav.classList.toggle('open');
+            });
+        }
+
+        // Smooth scroll pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Particles (version simplifiée)
+        const canvas = document.getElementById('particlesCanvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    speedY: (Math.random() - 0.5) * 0.5,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(p => {
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+
+                    if (p.x < 0) p.x = canvas.width;
+                    if (p.x > canvas.width) p.x = 0;
+                    if (p.y < 0) p.y = canvas.height;
+                    if (p.y > canvas.height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(165, 180, 252, ${p.opacity})`;
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -20,12 +20,12 @@
         <!-- Header -->
         <header class="header">
             <div class="header__brand">
+                <a href="index.html">
                 <div class="brand-logo">
-                    <img src="assets/images/logo.jpg" alt="DoctorPC">
-                </div>
+                    <img src="assets/logo.jpg" alt="DoctorPC">
+                </div></a>
                 <div class="brand-text">
                     <span class="brand-title">DoctorPC</span>
-                    <span class="brand-sub">Numérique Inclusif · Responsable · Durable</span>
                 </div>
             </div>
 
@@ -33,7 +33,8 @@
                 <a href="index.html" class="is-active">Accueil</a>
                 <a href="repair-game.html">Jeu de réparation</a>
                 <a href="page-linux.html">Installation Linux</a>
-                <a href="#" aria-label="Parler au ChatBot">Parler au ChatBot</a>
+                <a href="ia.html" aria-label="Parler au ChatBot">Parler au ChatBot</a>
+                <a href="carte.html" aria-current="page">Carte compétences</a>
                 <a href="avis.html">Donner un avis</a>
             </nav>
 
@@ -51,15 +52,15 @@
                     </h1>
 
                     <p class="hero__subtitle">
-                        Beaucoup d’établissements restent dépendants de grandes plateformes et 
-                        d’un matériel vite déclaré “obsolète”. NIRD propose une alternative fondée sur le libre, 
-                        le réemploi et la sobriété. Notre site explique comment gérer cette obsolescence et passer à l’action.
+                        Beaucoup d’établissements restent dépendants de grandes plateformes et
+                        d’un matériel vite déclaré “obsolète”. NIRD propose une alternative fondée sur le libre,
+                        le réemploi et la sobriété. Notre site explique comment gérer cette obsolescence et passer à
+                        l’action.
                     </p>
 
-                    
+
                     <div class="hero__buttons">
-                        <button class="btn btn--primary"
-                            onclick="window.location.href='repair-game.html'">
+                        <button class="btn btn--primary" onclick="window.location.href='repair-game.html'">
                             Répare ton ordinateur
                         </button>
                         <button class="btn btn--ghost" type="button" id="revealContentBtn">
@@ -70,8 +71,7 @@
                     <div class="hero__info hero__info--wide">
                         <div class="hero__info-text">
                             <p>Crée ta carte-compétences et vois ton trait de personnalité.</p>
-                            <button class="btn btn--ghost btn--small"
-                                onclick="window.location.href='carte.html'" >
+                            <button class="btn btn--ghost btn--small" onclick="window.location.href='carte.html'">
                                 Ouvrir la carte
                             </button>
                         </div>
@@ -102,176 +102,207 @@
             </section>
 
             <div class="content-sections">
-            <section class="section" id="actors">
-                <header class="section__head">
-                    <h2>Qui est impliqué dans NIRD ?</h2>
-                    <p>
-                        NIRD est porté par la Forge des communs numériques éducatifs et s'appuie
-                        sur un réseau d'acteurs dans et autour de l'école.
-                    </p>
-                </header>
-
-                <div class="grid grid--3">
-                    <article class="card reveal">
-                        <h3>Élèves et éco-délégués</h3>
+                <section class="section" id="actors">
+                    <header class="section__head">
+                        <h2>Qui est impliqué dans NIRD ?</h2>
                         <p>
-                            Ils mènent des enquêtes, testent des usages libres et
-                            proposent des pistes pour un numérique plus sobre.
+                            NIRD est porté par la Forge des communs numériques éducatifs et s'appuie
+                            sur un réseau d'acteurs dans et autour de l'école.
                         </p>
-                    </article>
+                    </header>
 
-                    <article class="card reveal">
-                        <h3>Enseignants et équipes éducatives</h3>
-                        <p>
-                            Ils intègrent la démarche NIRD dans les cours, les projets, les clubs,
-                            et partagent leurs retours d'expérience.
-                        </p>
-                    </article>
+                    <div class="grid grid--3">
+                        <article class="card reveal">
+                            <h3>Élèves et éco-délégués</h3>
+                            <p>
+                                Ils mènent des enquêtes, testent des usages libres et
+                                proposent des pistes pour un numérique plus sobre.
+                            </p>
+                        </article>
 
-                    <article class="card reveal">
-                        <h3>Partenaires & collectivités</h3>
-                        <p>
-                            Associations, collectivités et services techniques accompagnent la
-                            transition : matériel reconditionné, hébergement local, formations…
-                        </p>
-                    </article>
-                </div>
-            </section>
+                        <article class="card reveal">
+                            <h3>Enseignants et équipes éducatives</h3>
+                            <p>
+                                Ils intègrent la démarche NIRD dans les cours, les projets, les clubs,
+                                et partagent leurs retours d'expérience.
+                            </p>
+                        </article>
 
-            <section class="section section--alt" id="pc3d">
-                <header class="section__head">
-                    <h2>Que contient vraiment un PC ?</h2>
-                    <p>
-                        Pour parler de réemploi et d'obsolescence programmée, il faut voir ce qui
-                        se cache derrière la coque. Le modèle 3D de la page d'accueil sert de point
-                        de départ pour identifier les grandes familles de composants.
-                    </p>
-                </header>
-
-                <div class="pc3d">
-                    <div class="pc3d__info reveal">
-                        <h3>Quelques repères</h3>
-                        <ul>
-                            <li>Boîtier : souvent conservable, même si le reste évolue.</li>
-                            <li>Carte mère : supporte et relie tous les composants.</li>
-                            <li>Processeur et mémoire : rarement "morts", souvent juste mal utilisés.</li>
-                            <li>Stockage : on peut le changer ou le réutiliser ailleurs.</li>
-                            <li>Alimentation : joue sur la durée de vie et la consommation.</li>
-                        </ul>
-                        <p class="pc3d__note">
-                            Dans l'application finale, cette vue peut servir d'entrée vers des
-                            fiches pédagogiques, des mini-jeux ou des scénarios de réparation.
-                        </p>
+                        <article class="card reveal">
+                            <h3>Partenaires & collectivités</h3>
+                            <p>
+                                Associations, collectivités et services techniques accompagnent la
+                                transition : matériel reconditionné, hébergement local, formations…
+                            </p>
+                        </article>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section class="section" id="journey">
-                <header class="section__head">
-                    <h2>Objectifs de la plateforme</h2>
-                    <p>
-                        Le sujet est volontairement large. L'idée est de guider les publics de
-                        la prise de conscience vers des actions concrètes dans leur établissement.
-                    </p>
-                </header>
+                <section class="section section--alt" id="pc3d">
+                    <header class="section__head">
+                        <h2>Que contient vraiment un PC ?</h2>
+                        <p>
+                            Pour parler de réemploi et d'obsolescence programmée, il faut voir ce qui
+                            se cache derrière la coque. Le modèle 3D de la page d'accueil sert de point
+                            de départ pour identifier les grandes familles de composants.
+                        </p>
+                    </header>
 
-                <div class="journey">
-                    <div class="journey__list">
-                        <div class="step reveal">
-                            <span class="step__id">1</span>
-                            <div>
-                                <h3>Poser le décor</h3>
-                                <p>
-                                    Expliquer simplement ce qui pose problème aujourd'hui :
-                                    dépendances logicielles, données hébergées ailleurs, matériel remplacé trop vite.
-                                </p>
+                    <div class="pc3d">
+                        <div class="pc3d__info reveal">
+                            <h3>Quelques repères</h3>
+                            <ul>
+                                <li>Boîtier : souvent conservable, même si le reste évolue.</li>
+                                <li>Carte mère : supporte et relie tous les composants.</li>
+                                <li>Processeur et mémoire : rarement "morts", souvent juste mal utilisés.</li>
+                                <li>Stockage : on peut le changer ou le réutiliser ailleurs.</li>
+                                <li>Alimentation : joue sur la durée de vie et la consommation.</li>
+                            </ul>
+                            <p class="pc3d__note">
+                                Dans l'application finale, cette vue peut servir d'entrée vers des
+                                fiches pédagogiques, des mini-jeux ou des scénarios de réparation.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section" id="journey">
+                    <header class="section__head">
+                        <h2>La démarche NIRD</h2>
+                        <p>
+                            il s’agit d’amener chaque établissement,
+                            quel que soit son niveau de maturité numérique, vers des pratiques plus inclusives,
+                            plus responsables et plus durables. L’objectif : comprendre, choisir et agir.
+                        </p>
+                    </header>
+
+                    <div class="journey">
+                        <div class="journey__list">
+                            <div class="step reveal">
+                                <span class="step__id">1</span>
+                                <div>
+                                    <h3>Inclusion numérique</h3>
+                                    <p> Identifier les obstacles actuels : dépendances à des plateformes non maîtrisées,
+                                        difficultés d’accès aux outils, matériel remplacé avant d’être réellement
+                                        obsolète.
+                                        L’inclusion consiste à redonner du contrôle, à réduire les barrières,
+                                        et à permettre à chacun de comprendre et d’utiliser le numérique de façon
+                                        autonome.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="step reveal">
+                                <span class="step__id">2</span>
+                                <div>
+                                    <h3>Responsabilité et éthique numérique</h3>
+                                    <p>
+                                        Montrer qu’il existe d’autres modèles : logiciels libres, souverains et
+                                        pérennes,
+                                        démarches de réemploi, choix techniques qui respectent la vie privée et les
+                                        données.
+                                        Il s’agit d’adopter des pratiques éthiques en cohérence avec les valeurs
+                                        éducatives
+                                        et de découvrir des initiatives NIRD déjà actives dans d'autres établissements.
+                                </div>
+                            </div>
+
+                            <div class="step reveal">
+                                <span class="step__id">3</span>
+                                <div>
+                                    <h3>Durabilité écologique</h3>
+                                    <p>
+                                        Concrétiser la transition : ateliers de réparation, analyse du parc,
+                                        optimisation des usages, projets de classes autour du recyclage numérique.
+                                        La plateforme doit proposer des pistes d’actions simples, visibles, et
+                                        immédiatement applicables.
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="step reveal">
-                            <span class="step__id">2</span>
-                            <div>
-                                <h3>Montrer d'autres chemins</h3>
-                                <p>
-                                    Faire découvrir des exemples de migration vers des solutions libres,
-                                    des expériences de réemploi, des initiatives NIRD déjà en place.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="step reveal">
-                            <span class="step__id">3</span>
-                            <div>
-                                <h3>Donner des idées d'actions</h3>
-                                <p>
-                                    Ateliers élèves, projets de classe, cartographie du parc, campagne
-                                    de sensibilisation… L'interface doit laisser des pistes concrètes.
-                                </p>
-                            </div>
-                        </div>
+                        <aside class="journey__side reveal">
+                            <h3>CAutonomie & gouvernance numérique</h3>
+                            <p> Un volet essentiel du NIRD consiste à développer une véritable autonomie numérique :</p>
+                            <ul>
+                                <li>Choisir ses outils en fonction des besoins réels, pas selon les tendances du marché.
+                                </li>
+                                <li>Comprendre où vont les données et qui maîtrise les infrastructures.</li>
+                                <li>Favoriser des solutions ouvertes, réparables, documentées et appropriables.</li>
+                            </ul>
+                            <p class="journey__note">
+                                L’objectif est que chaque établissement gagne en maîtrise, renforce sa
+                                capacité à décider et devienne acteur — et non simple consommateur —
+                                de son environnement numérique.
+                            </p>
+                        </aside>
                     </div>
+                </section>
 
-                    <aside class="journey__side reveal">
-                        <h3>Contraintes pour la Nuit</h3>
-                        <ul>
-                            <li>Application en ligne à la fin de la Nuit.</li>
-                            <li>Ressources et médias libres de droit.</li>
-                            <li>Code et contenu publiés sous licence libre.</li>
-                        </ul>
-                        <p class="journey__note">
-                            Vous pouvez choisir le format : récit interactif, carte du "village",
-                            tableau de bord, jeu court… L'important est que ce soit clair et utilisable.
-                        </p>
-                    </aside>
-                </div>
-            </section>
 
-            <section class="section" id="resources">
-                <header class="section__head">
-                    <h2>Ressources pour aller plus loin</h2>
-                    <p>
-                        Quelques points d'entrée pour nourrir le contenu de l'application
-                        et vérifier les informations présentées.
-                    </p>
-                </header>
-
-                <div class="resources">
-                    <div class="resources__group">
-                        <h3>Site NIRD</h3>
-                        <ul>
-                            <li>
-                                <a href="https://nird.forge.apps.education.fr/" target="_blank">
-                                    Site officiel de la démarche NIRD
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="resources__group">
-                        <h3>Médias</h3>
-                        <ul>
-                            <li><a href="#" target="_blank">Reportages sur les logiciels libres à l'école</a></li>
-                            <li><a href="#" target="_blank">Obsolescence programmée et reconditionnement</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="resources__group">
-                        <h3>Exemples d'établissements</h3>
-                        <ul>
-                            <li><a href="#" target="_blank">Projet NIRD au lycée Carnot</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
             </div>
 
         </main>
 
-        <footer class="footer content-sections">
-            <p>
-                Nuit de l'Info 2025 · Projet NIRD · Vers un numérique plus libre et plus sobre.
-            </p>
+     <footer class="footer">
+            <div class="footer__main">
+                <div class="footer__brand">
+                    <div class="footer__brand-header">
+                        <div class="footer__logo">
+                            <img src="assets/logo.jpg" alt="DoctorPC">
+                        </div>
+                        <span class="footer__brand-name">DoctorPC</span>
+                    </div>
+                    <p class="footer__brand-desc">
+                        Numérique Inclusif, Responsable et Durable. Un projet éducatif pour 
+                        sensibiliser aux enjeux du numérique sobre et du réemploi informatique.
+                    </p>
+                    <div class="footer__social">
+                        <a href="https://github.com/Lakhdaria/NIRD" target="_blank" class="footer__social-link" title="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer__column">
+                    <h4>Navigation</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="repair-game.html">Jeu de réparation</a></li>
+                        <li><a href="page-linux.html">Installation Linux</a></li>
+                        <li><a href="carte.html">Carte compétences</a></li>
+                        <li><a href="avis.html">Donner un avis</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__column">
+                    <h4>Ressources</h4>
+                    <ul class="footer__links">
+                        <li><a href="https://github.com/Lakhdaria/NIRD" target="_blank">Code source</a></li>
+                        <li><a href="mentions-legales.html">Mentions légales</a></li>
+                        <li><a href="mentions-legales.html#credits">Crédits</a></li>
+                        <li><a href="mentions-legales.html#technologies">Technologies</a></li>
+                    </ul>
+                </div>
+
+               
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    © 2025 <a href="https://github.com/Lakhdaria/NIRD" target="_blank">Projet NIRD</a> · 
+                    Nuit de l'Info 2025 · Vers un numérique plus libre et plus sobre.
+                </p>
+                <div class="footer__legal">
+                    <a href="mentions-legales.html">Mentions légales</a>
+                    <a href="mentions-legales.html#credits">Crédits</a>
+                    <a href="https://github.com/Lakhdaria/NIRD" target="_blank">GitHub</a>
+                </div>
+            </div>
         </footer>
+
     </div>
 
     <script type="importmap">
@@ -287,5 +318,3 @@
 </body>
 
 </html>
-
-

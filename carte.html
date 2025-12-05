@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carte de compétences - NIRD</title>
+    <meta name="description" content="Créez votre carte de compétences NIRD et découvrez votre profil numérique.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/styles_global.css">
+    <link rel="stylesheet" href="styles/carte.css">
+</head>
+
+<body>
+    <!-- Particules animées -->
+    <canvas id="particlesCanvas" aria-hidden="true"></canvas>
+    <div class="bg"></div>
+
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="header__brand">
+                <a href="index.html">
+                    <div class="brand-logo">
+                        <img src="assets/logo.jpg" alt="DoctorPC">
+                    </div>
+                </a>
+                <div class="brand-text">
+                    <span class="brand-title">DoctorPC</span>
+                </div>
+            </div>
+
+            <nav class="nav" id="navMenu">
+                <a href="index.html">Accueil</a>
+                <a href="repair-game.html">Jeu de réparation</a>
+                <a href="page-linux.html">Installation Linux</a>
+                <a href="ia.html" aria-label="Parler au ChatBot">Parler au ChatBot</a>
+                <a href="carte.html" class="is-active" aria-current="page">Carte compétences</a>
+                <a href="avis.html">Donner un avis</a>
+            </nav>
+
+
+            <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <main class="carte-page">
+            <!-- Hero Section -->
+            <section class="carte-hero" aria-labelledby="page-title">
+                <h1 id="page-title" class="carte-hero__title">
+                    Crée ta carte de compétences
+                </h1>
+                <p class="carte-hero__subtitle">
+                    Réponds aux questions pour chaque catégorie et découvre ton profil numérique personnalisé.
+                </p>
+
+                <!-- Barre de progression -->
+                <div class="progress-tracker" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="7"
+                    aria-label="Progression du questionnaire">
+                    <div class="progress-tracker__bar">
+                        <div class="progress-tracker__fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-tracker__steps" id="progressSteps">
+                        <span class="progress-step is-active" data-step="0">Identité</span>
+                        <span class="progress-step" data-step="1">Tech</span>
+                        <span class="progress-step" data-step="2">Éco</span>
+                        <span class="progress-step" data-step="3">Innov</span>
+                        <span class="progress-step" data-step="4">Collab</span>
+                        <span class="progress-step" data-step="5">Créa</span>
+                        <span class="progress-step" data-step="6">Impact</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contenu principal -->
+            <section class="carte-content">
+                <div class="carte-grid">
+
+                    <!-- Colonne gauche : Carte de compétences -->
+                    <div class="carte-card-wrapper">
+                        <div class="carte-card" id="competenceCard">
+                            <!-- Header de la carte -->
+                            <div class="carte-card__header">
+                                <div class="carte-card__rating" id="rating" aria-label="Score global">
+                                    <span class="rating-value">0</span>
+                                    <span class="rating-label">Score</span>
+                                </div>
+                                <div class="carte-card__player">
+                                    <h2 id="playerName" class="player-name">Prénom Nom</h2>
+                                    <span class="player-badge" id="playerBadge">
+                                        <span class="badge-icon">🎯</span>
+                                        <span class="badge-text">En cours...</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Stats de la carte -->
+                            <div class="carte-card__stats" id="statsGrid">
+                                <div class="stat-item" data-key="technicite">
+                                    <div class="stat-item__header">
+                                        <span class="stat-item__label">Technicité</span>
+                                        <span class="stat-item__value" id="statTechnicite">0</span>
+                                    </div>
+                                    <div class="stat-item__bar">
+                                        <div class="stat-item__fill" data-stat="technicite"></div>
+                                    </div>
+                                </div>
+
+                                <div class="stat-item" data-key="ecologie">
+                                    <div class="stat-item__header">
+                                        <span class="stat-item__label">Écologie</span>
+                                        <span class="stat-item__value" id="statEcologie">0</span>
+                                    </div>
+                                    <div class="stat-item__bar">
+                                        <div class="stat-item__fill" data-stat="ecologie"></div>
+                                    </div>
+                                </div>
+
+                                <div class="stat-item" data-key="innovation">
+                                    <div class="stat-item__header">
+                                        <span class="stat-item__label">Innovation</span>
+                                        <span class="stat-item__value" id="statInnovation">0</span>
+                                    </div>
+                                    <div class="stat-item__bar">
+                                        <div class="stat-item__fill" data-stat="innovation"></div>
+                                    </div>
+                                </div>
+
+                                <div class="stat-item" data-key="collaboration">
+                                    <div class="stat-item__header">
+                                        <span class="stat-item__label">Collaboration</span>
+                                        <span class="stat-item__value" id="statCollaboration">0</span>
+                                    </div>
+                                    <div class="stat-item__bar">
+                                        <div class="stat-item__fill" data-stat="collaboration"></div>
+                                    </div>
+                                </div>
+
+                                <div class="stat-item" data-key="creativite">
+                                    <div class="stat-item__header">
+                                        <span class="stat-item__label">Créativité</span>
+                                        <span class="stat-item__value" id="statCreativite">0</span>
+                                    </div>
+                                    <div class="stat-item__bar">
+                                        <div class="stat-item__fill" data-stat="creativite"></div>
+                                    </div>
+                                </div>
+
+                                <div class="stat-item" data-key="impact">
+                                    <div class="stat-item__header">
+                                        <span class="stat-item__label">Impact social</span>
+                                        <span class="stat-item__value" id="statImpact">0</span>
+                                    </div>
+                                    <div class="stat-item__bar">
+                                        <div class="stat-item__fill" data-stat="impact"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Colonne droite : Assistant / Avatar -->
+                    <div class="carte-assistant-wrapper">
+
+                        <!-- Panel Assistant (Questions) -->
+                        <div class="assistant-panel" id="assistantPanel">
+                            <div class="assistant-panel__header">
+                                <span class="assistant-panel__eyebrow">Assistant</span>
+                                <h3 class="assistant-panel__title" id="assistantTitle">Complète tes infos</h3>
+                                <p class="assistant-panel__hint" id="assistantHint">
+                                    Remplis le formulaire puis clique sur "Suivant" pour continuer.
+                                </p>
+                            </div>
+
+                            <form class="assistant-form" id="assistantForm" novalidate>
+                                <!-- Contenu dynamique injecté par JS -->
+                            </form>
+
+                            <div class="assistant-panel__actions">
+                                <button type="button" class="btn-assistant btn-assistant--primary" id="btnNext">
+                                    <span>Suivant</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn-assistant btn-assistant--ghost" id="btnReset">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                        <path d="M3 3v5h5" />
+                                    </svg>
+                                    <span>Réinitialiser</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Panel Avatar (Résultat final) -->
+                        <div class="avatar-panel is-hidden" id="avatarPanel">
+                            <div class="avatar-panel__image" id="avatarImage" role="img"
+                                aria-label="Votre avatar de profil"></div>
+                            <div class="avatar-panel__content">
+                                <h3 class="avatar-panel__title" id="avatarTitle">Ton profil</h3>
+                                <p class="avatar-panel__description" id="avatarDescription">
+                                    <!-- Description dynamique -->
+                                </p>
+                            </div>
+                            <div class="avatar-panel__actions">
+                                <button type="button" class="btn-assistant btn-assistant--primary" id="btnRestart">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                        <path d="M3 3v5h5" />
+                                    </svg>
+                                    <span>Recommencer</span>
+                                </button>
+                                <button type="button" class="btn-assistant btn-assistant--ghost" id="btnShare">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="18" cy="5" r="3" />
+                                        <circle cx="6" cy="12" r="3" />
+                                        <circle cx="18" cy="19" r="3" />
+                                        <path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98" />
+                                    </svg>
+                                    <span>Partager</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer__main">
+                <div class="footer__brand">
+                    <div class="footer__brand-header">
+                        <div class="footer__logo">
+                            <img src="assets/logo.jpg" alt="DoctorPC">
+                        </div>
+                        <span class="footer__brand-name">DoctorPC</span>
+                    </div>
+                    <p class="footer__brand-desc">
+                        Numérique Inclusif, Responsable et Durable. Un projet éducatif pour
+                        sensibiliser aux enjeux du numérique sobre et du réemploi informatique.
+                    </p>
+                    <div class="footer__social">
+                        <a href="https://github.com/Lakhdaria/NIRD" target="_blank" class="footer__social-link"
+                            title="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer__column">
+                    <h4>Navigation</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="repair-game.html">Jeu de réparation</a></li>
+                        <li><a href="page-linux.html">Installation Linux</a></li>
+                        <li><a href="carte.html">Carte compétences</a></li>
+                        <li><a href="avis.html">Donner un avis</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__column">
+                    <h4>Ressources</h4>
+                    <ul class="footer__links">
+                        <li><a href="https://github.com/Lakhdaria/NIRD" target="_blank">Code source</a></li>
+                        <li><a href="mentions-legales.html">Mentions légales</a></li>
+                        <li><a href="mentions-legales.html#credits">Crédits</a></li>
+                        <li><a href="mentions-legales.html#technologies">Technologies</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    © 2025 <a href="https://github.com/Lakhdaria/NIRD" target="_blank">Projet NIRD</a> ·
+                    Nuit de l'Info 2025 · Vers un numérique plus libre et plus sobre.
+                </p>
+                <div class="footer__legal">
+                    <a href="mentions-legales.html">Mentions légales</a>
+                    <a href="mentions-legales.html#credits">Crédits</a>
+                    <a href="https://github.com/Lakhdaria/NIRD" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Script -->
+    <script src="scripts/carte.js"></script>
+</body>
+
+</html>

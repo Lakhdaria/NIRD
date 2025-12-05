@@ -406,7 +406,8 @@ const gameState = {
         gpu: false
     },
     quizAnswers: 0,
-    quizTotal: QUIZ_QUESTIONS.length
+    quizTotal: QUIZ_QUESTIONS.length,
+    quizReady: false
 };
 
 // ============================================
@@ -424,6 +425,8 @@ const gpuCard = document.getElementById("gpuCard");
 const quizModal = document.getElementById("quizModal");
 const quizContainer = document.getElementById("quizContainer");
 const quizResults = document.getElementById("quizResults");
+const quizCta = document.getElementById("quizCta");
+const startQuizBtn = document.getElementById("startQuizBtn");
 const infoPanel = document.getElementById("infoPanel");
 const infoPanelContent = document.getElementById("infoPanelContent");
 const infoPanelClose = document.getElementById("infoPanelClose");
@@ -505,6 +508,27 @@ function initThreeJS() {
 
     // Animation loop
     animate();
+}
+
+// Libère le modèle et le renderer pour économiser mémoire/GPU
+function disposeThree() {
+    if (pcModel) {
+        scene.remove(pcModel);
+        pcModel.traverse((child) => {
+            if (child.isMesh) {
+                child.geometry?.dispose();
+                if (child.material) {
+                    if (Array.isArray(child.material)) {
+                        child.material.forEach((m) => m?.dispose?.());
+                    } else {
+                        child.material.dispose?.();
+                    }
+                }
+            }
+        });
+        pcModel = null;
+    }
+    renderer?.dispose();
 }
 
 // ============================================
@@ -668,9 +692,11 @@ function installPart(partType, position) {
     if (allInstalled) {
         setTimeout(() => {
             NotificationMgr.allPartsComplete();
-            setTimeout(() => {
-                showQuiz();
-            }, 1500);
+            gameState.quizReady = true;
+            if (quizCta) {
+                quizCta.classList.remove('is-hidden');
+                quizCta.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }, 2500); // Un peu plus de temps pour l'animation de focus
     }
 }
@@ -789,27 +815,28 @@ function setupInfoButtons() {
 // ============================================
 
 function updateHealth(amount) {
-    gameState.health = Math.min(gameState.health + amount, 100);
+    gameState.health = Math.min(gameState.health + amount, 100)
+    const displayHealth = Math.round(gameState.health)
     
     // Animer la barre
-    healthBarFill.style.width = `${gameState.health}%`;
-    healthPercentage.textContent = `${gameState.health}%`;
+    healthBarFill.style.width = `${displayHealth}%`
+    healthPercentage.textContent = `${displayHealth}%`
 
-    // Animer le cœur
-    if (gameState.health > 0) {
-        heartIcon.classList.add('active');
+    // Animer le c?ur
+    if (displayHealth > 0) {
+        heartIcon.classList.add('active')
     }
 
-    // Mettre à jour le status
-    if (gameState.health === 0) {
-        healthStatus.textContent = "Le PC attend d'être réparé...";
-    } else if (gameState.health < 50) {
-        healthStatus.textContent = "Le PC reprend vie ! Continuez...";
-    } else if (gameState.health < 100) {
-        healthStatus.textContent = "Excellent progrès ! Presque terminé...";
+    // Mettre ? jour le status
+    if (displayHealth === 0) {
+        healthStatus.textContent = "Le PC attend d'être réparé..."
+    } else if (displayHealth < 50) {
+        healthStatus.textContent = "Le PC reprend vie ! Continuez..."
+    } else if (displayHealth < 100) {
+        healthStatus.textContent = "Excellent progrès ! Presque terminé..."
     } else {
-        healthStatus.textContent = "🎉 PC complètement réparé et fonctionnel !";
-        heartIcon.classList.remove('active');
+        healthStatus.textContent = "PC complètement réparé et fonctionnel !"
+        heartIcon.classList.remove('active')
     }
 }
 
@@ -818,6 +845,8 @@ function updateHealth(amount) {
 // ============================================
 
 function showQuiz() {
+    if (!gameState.quizReady) return;
+    if (quizCta) quizCta.classList.add('is-hidden');
     // Masquer les instructions
     const instructions = document.getElementById('gameInstructions');
     if (instructions) {
@@ -907,7 +936,7 @@ function showResults() {
     quizContainer.style.display = 'none';
     quizResults.style.display = 'block';
 
-    document.getElementById('finalScore').textContent = `${gameState.health}%`;
+    document.getElementById('finalScore').textContent = `${Math.round(gameState.health)}%`;
     document.getElementById('correctAnswers').textContent = `${gameState.quizAnswers}/${gameState.quizTotal}`;
     
     // Notification de succès final
@@ -1091,6 +1120,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initParticles();
     initBurgerMenu();
     initRevealOnScroll();
+
+    if (startQuizBtn) {
+        startQuizBtn.addEventListener('click', () => {
+            showQuiz();
+        });
+    }
 
     console.log("✅ Jeu prêt (optimisé + GPU + fiches info) !");
 });
